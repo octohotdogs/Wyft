@@ -1,12 +1,12 @@
-# Project Name
+# Wyft
 
-> Pithy project description
+Do you like using Lyft, the app that's basically your friend with a car? Wouldn't it be cool to meet people and use their wifi in exchange for a (completely optional) gift? Wyft allows you to search for users within a zip code offering to host you and give you access to their wifi. You might just meet your next best friend.
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Arianna
+  - __Scrum Master__: Arianna
+  - __Development Team Members__: Rosita, Al, Josh, Roy
 
 ## Table of Contents
 
@@ -20,6 +20,7 @@
 
 ## Usage
 
+<!-- tbd -->
 Install nodes package
 `npm install`
 
@@ -31,11 +32,11 @@ Turn on the server, go to localhost:3000
 
 ## Requirements
 
-- Node 0.10.x
+<!-- - Node 0.10.x
 - Redis 2.6.x
 - Postgresql 9.1.x
 - etc
-- etc
+- etc -->
 
 ## Development
 
