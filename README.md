@@ -25,7 +25,7 @@ Install nodes package
 `npm install`
 
 Turn on the server, go to localhost:3000
-`npm start`
+`npm run server-dev`
 
 
 
