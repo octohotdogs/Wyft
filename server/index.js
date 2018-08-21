@@ -1,7 +1,10 @@
 const express = require('express');
+var bodyParser = require('body-parser');
 const app = express();
 
-app.get('/', (req, res) => res.send('Hello world FFF'));
+
+app.use(express.static(__dirname + '/../client/dist'));
+//app.get('/', (req, res) => res.send('Hello world FFF'));
 
 
 
