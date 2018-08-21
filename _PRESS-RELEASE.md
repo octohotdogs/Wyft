@@ -19,7 +19,7 @@ Once the project moves into development, the press release can be used as a touc
 ## Wyft ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
 
-## Sub-Heading ##
+## YOYO WIFI ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
 
 ## Summary ##
