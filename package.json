@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index.js"
+    "react-dev": "webpack -d --watch",
+    "server-dev": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,20 @@
     "url": "https://github.com/freemanFansForever/Wyft/issues"
   },
   "homepage": "https://github.com/freemanFansForever/Wyft#readme",
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "webpack": "^2.2.1"
+  },
   "dependencies": {
-    "express": "^4.16.3"
+    "body-parser": "^1.17.2",
+    "express": "^4.16.3",
+    "jquery": "^3.1.1",
+    "mongoose": "^4.8.6",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "underscore": "^1.9.1"
   }
 }
