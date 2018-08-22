@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index.js"
+    "server-dev": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,12 @@
   },
   "homepage": "https://github.com/freemanFansForever/Wyft#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "body-parser": "^1.17.2",
+    "express": "^4.16.3",
+    "jquery": "^3.1.1",
+    "mongoose": "^4.8.6",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "underscore": "^1.9.1"
   }
 }
