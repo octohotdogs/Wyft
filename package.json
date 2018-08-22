@@ -1,11 +1,12 @@
 {
   "name": "wyft",
   "version": "1.0.0",
-  "description": "",
+  "description": "Do you like using Lyft, the app that's basically your friend with a car? Wouldn't it be cool to meet people and use their wifi in exchange for a (completely optional) gift? Wyft allows you to search for users within a zip code offering to host you and give you access to their wifi. You might just meet your next best friend.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server-dev": "nodemon server/index.js"
+    "server-dev": "nodemon server/index.js",
+    "react-dev": "parcel react-client/dist/index.html"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,6 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "underscore": "^1.9.1"
-  }
+  },
+  "keywords": []
 }
