@@ -28,7 +28,32 @@ Turn on the server, go to localhost:3000
 `npm run server-dev`
 
 
+## Making endpoint request from client as
+- Guest
+ 1. POST request (search nearby wifi hosts)
+ ```javascript
+   $.ajax({
+   	  url: "/api/guests/search",
+   	  type: "POST",
+   	  data: {"zipcode": "91234"},
+   	  contentType: 'application/json'
+   	}).done((data) => {
+   		console.log(data)
+   	});
+ ```
 
+- Host
+ 1. POST request (create a new host)
+  ```javascript
+   $.ajax({
+   	  url: "/api/hosts",
+   	  type: "POST",
+   	  data: {"zipcode": "91234"},
+   	  contentType: 'application/json'
+   	}).done((msg) => {
+   		console.log(msg)
+   	});
+ ```
 
 ## Requirements
 
