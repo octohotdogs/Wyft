@@ -19,26 +19,32 @@ Once the project moves into development, the press release can be used as a touc
 ## Wyft ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
 
-## YOYO WIFI ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+## Sub-Heading ##
+  > Wifi for aynone, anywhere.
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > Wyft lets you connect to wifi when you need it.
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
+  As a guest you will have access Wifi whereever you are, on the other hand hosting with Wyft let's get what ever you need at that time delivered.
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+  Wyft is a safe place to connect to the Internet and other people in your community. We have customers that get their weekly grocerries for free hosting with Wyft.
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
+  Choose if you want to be host or a guest. Depending on the zip code, Wyft will match you up.
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  Mike Larson:
+    I like Wyft much more than going to a coffee shop, Internet is usually much faster and the environment is much more peaceful for working. I've used Wyft almost everywhere and met some nice people.
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
+  Enter your zip code and connect within seconds.
