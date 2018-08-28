@@ -32,6 +32,8 @@ Turn on the server, go to localhost:3000
 
 ## Requirements
 
+Express 4.16.3
+
 <!-- - Node 0.10.x
 - Redis 2.6.x
 - Postgresql 9.1.x
