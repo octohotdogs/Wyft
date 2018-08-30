@@ -3,6 +3,9 @@ var bodyParser = require('body-parser');
 const data = require('./../data/host_addresses.json');
 const app = express();
 
+// recommendation, explanation is fuzzy, ask NFD >
+
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client/dist'));
 //app.get('/', (req, res) => res.send('Hello world FFF'));
