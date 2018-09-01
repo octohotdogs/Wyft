@@ -11,22 +11,52 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client/dist'));
 //app.get('/', (req, res) => res.send('Hello world FFF'));
 
-app.get('/api/hosts', (req, res) => {
-	res.json(data);
-});
+// app.get('/api/hosts', (req, res) => {
+// 	res.json(data);
+// });
 
-
-app.post('/api/hosts', (req, res) => {
-	console.log('body...',req.body);
-	//throw new Error("BROKEN");
-	var successMsg = {"message": "Thanks for hosting your wifi with us"}
-	res.json(successMsg);
-});
+// app.post('/api/hosts', (req, res) => {
+// 	console.log('body...',req.body);
+// 	//throw new Error("BROKEN");
+// 	var successMsg = {"message": "Thanks for hosting your wifi with us"}
+// 	res.json(successMsg);
+// });
 
 app.post('/api/guests/search', (req, res) => {
 	console.log('body...', req.body);
 	res.json(data.slice(0, 6));
 });
+
+// host crud
+app.route('/api/hosts')
+	.get((req, res) => {
+		res.json(data);
+	})
+	.post((req, res) => {
+		console.log('body...',req.body);
+		var successMsg = {"message": "Thanks for hosting your wifi with us"}
+		res.json(successMsg);		
+	});
+
+app.route('/api/hosts/:hostId')
+	.get((req, res) => {
+		var hostId = req.params['hostId'];
+		// TODO
+		// find the host from db
+		res.json({hostId: hostId});
+	})
+	.put((req, res) => {
+		var hostId = req.params['hostId'];
+		var host = req.body;
+		//TODO 
+		// save the new host info to db
+		res.json({hostId: hostId});
+	})
+	.delete((req, res) => {
+		//TODO 1. get the host info from db, delete it
+		res.json({hostId: hostId});
+	})
+
 
 
 
