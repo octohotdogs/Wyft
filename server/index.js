@@ -29,6 +29,25 @@ app.post('/api/guests/search', (req, res) => {
 	res.json(data.slice(0, 6));
 });
 
+//testing insert into guest
+var guestData = {};
+  guestData.firstName = 'freemanFans';
+  guestData.lastName = 'forever';
+  guestData.streetNum = 680;
+  guestData.streetName = 'street name';
+  guestData.zip = 30080;
+  guestData.userName = 'fff';
+  guestData.password = 'abcd';
+  guestData.optional = 'netflix';
+
+var sessionDummy ={};
+sessionDummy.date = "01-JAN-2019";
+sessionDummy.start = "11:00 AM";
+sessionDummy.end = "1:00 PM";
+//db.insertIntoHost(guestData);
+db.insertIntoHostingSession(sessionDummy,1);
+
+
 // host crud
 app.route('/api/hosts')
 	.get((req, res) => {		
@@ -43,6 +62,5 @@ app.route('/api/hosts/:hostId')
 	})
 	.put( hosts.put )
 	.delete( hosts.delete )
-
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
