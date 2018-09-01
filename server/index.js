@@ -1,7 +1,10 @@
 const express = require('express');
 var bodyParser = require('body-parser');
 const data = require('./../data/host_addresses.json');
-//const db = require('../db/index.js');
+const db = require('../db/index.js');
+//const guest = require('./../data/guest.json');
+//const host = require('./../data/host.json');
+
 const app = express();
 const hosts = require('./controllers/hosts.js');
 
@@ -30,22 +33,23 @@ app.post('/api/guests/search', (req, res) => {
 });
 
 //testing insert into guest
-var guestData = {};
-  guestData.firstName = 'freemanFans';
-  guestData.lastName = 'forever';
-  guestData.streetNum = 680;
-  guestData.streetName = 'street name';
-  guestData.zip = 30080;
-  guestData.userName = 'fff';
-  guestData.password = 'abcd';
-  guestData.optional = 'netflix';
+// var guestData = {};
+// guestData.firstName = 'freemanFans';
+// guestData.lastName = 'forever';
+// guestData.streetNum = 680;
+// guestData.streetName = 'street name';
+// guestData.zip = 30080;
+// guestData.userName = 'fff';
+// guestData.password = 'abcd';
+// guestData.optional = 'netflix';
 
-var sessionDummy ={};
-sessionDummy.date = "01-JAN-2019";
-sessionDummy.start = "11:00 AM";
-sessionDummy.end = "1:00 PM";
+// var sessionDummy ={};
+// sessionDummy.date = "01-JAN-2019";
+// sessionDummy.start = "11:00 AM";
+// sessionDummy.end = "1:00 PM";
+
 //db.insertIntoHost(guestData);
-db.insertIntoHostingSession(sessionDummy,1);
+//db.insertIntoHostingSession(sessionDummy,1);
 
 
 // host crud
@@ -53,7 +57,9 @@ app.route('/api/hosts')
 	.get((req, res) => {		
 		hosts.get(req, res, data, null)
 	})
-	.post(hosts.post);
+	.post((req, res) => {
+		hosts.post(req, res, db)
+	});
 
 app.route('/api/hosts/:hostId')
 	.get( (req, res) => {
