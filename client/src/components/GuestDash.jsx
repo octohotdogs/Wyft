@@ -10,8 +10,13 @@ class GuestDashboard extends React.Component {
 
 
   render() {
-
+    // return (<div>
+    //   <input value={this.state} onChange={this.onChange}></input>
+    //   <button onClick={this.addNote}> save note </button>
+    //   </div>)
   }
 }
 
 export default GuestDashboard;
+
+
