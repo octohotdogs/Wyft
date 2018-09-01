@@ -1,0 +1,10 @@
+{
+	"firstName": "josh",
+	"lastName": "chen",
+	"streetNum": 123,
+	"streetName": "street name",
+	"zip": 91293,
+	"userName": "ccc",
+	"password": "abcd",
+	"optional": "netflix"
+}
