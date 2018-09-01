@@ -76,6 +76,15 @@ sudo npm install -g bower
 npm install
 bower install
 ```
+## Config with SQL
+login to sql
+```
+mysql -u root
+```
+
+```sql
+create database wyft;
+```
 
 ### Roadmap
 
