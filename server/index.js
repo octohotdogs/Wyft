@@ -1,7 +1,7 @@
 const express = require('express');
 var bodyParser = require('body-parser');
 const data = require('./../data/host_addresses.json');
-const db = require('../db/index.js');
+//const db = require('../db/index.js');
 const app = express();
 const hosts = require('./controllers/hosts.js');
 
