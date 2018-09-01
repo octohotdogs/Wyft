@@ -1,6 +1,7 @@
 const express = require('express');
 var bodyParser = require('body-parser');
 const data = require('./../data/host_addresses.json');
+const db = require('../db/index.js');
 const app = express();
 
 // recommendation, explanation is fuzzy, ask NFD >
