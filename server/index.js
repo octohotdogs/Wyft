@@ -22,6 +22,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 // 	res.json(successMsg);
 // });
 
+// guest searching endpoint
 app.post('/api/guests/search', (req, res) => {
 	console.log('body...', req.body);
 	res.json(data.slice(0, 6));
@@ -57,6 +58,7 @@ app.route('/api/hosts/:hostId')
 		res.json({hostId: hostId});
 	})
 
+// guest
 
 
 
