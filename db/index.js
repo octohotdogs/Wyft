@@ -38,6 +38,7 @@ const Host = orm.define('Host', {
 });
 
 const Hosting_Session = orm.define('Hosting_Session',{
+
   DATE: Sequelize.STRING,
   START_TIME: Sequelize.STRING,
   END_TIME: Sequelize.STRING,
@@ -45,26 +46,73 @@ const Hosting_Session = orm.define('Hosting_Session',{
 
 orm.query("set FOREIGN_KEY_CHECKS=1");
 
-Hosting_Session.hasMany(Host);
-Host.belongsTo(Hosting_Session);
+Hosting_Session.belongsTo(Host,{as:'theHost',foreignKey:'host_id'});
+Host.hasMany(Hosting_Session,{foreignKey:'host_id'});
+
 Guest.sync();
 Host.sync();
 Hosting_Session.sync();
 
 const insertIntoGuest = function(guestData) {
-  const FIRST_NAME = guestData.firstName
-  const LAST_NAME = guestData.lastName
-  const STREET_NUMBER = guestData.streetNum
-  const STREET_NAME = guestData.streetName
-  const ZIP_CODE = guestData.zip
-  const USERNAME = guestData.userName
-  const PASSWORD= guestData.password
-  const PRIMARY_PURPOSE = guestData.purpose
+  const FIRST_NAME = guestData.firstName;
+  const LAST_NAME = guestData.lastName;
+  const STREET_NUMBER = guestData.streetNum;
+  const STREET_NAME = guestData.streetName;
+  const ZIP_CODE = guestData.zip;
+  const USERNAME = guestData.userName;
+  const PASSWORD= guestData.password;
+  const PRIMARY_PURPOSE = guestData.purpose;
+  return Guest.sync().then(function(){
+    Guest.create({FIRST_NAME : FIRST_NAME, LAST_NAME: LAST_NAME, STREET_NUMBER:STREET_NUMBER,STREET_NAME:STREET_NAME,ZIP_CODE:ZIP_CODE,USERNAME:USERNAME,PASSWORD:PASSWORD,PRIMARY_PURPOSE:PRIMARY_PURPOSE});
+  }).then(function(result){
+    console.log("FROM DB : INSERTED GUEST DATA TO GUEST TABLE");
+  });
 }
+
+const insertIntoHost = function(hostData) {
+  const FIRST_NAME = hostData.firstName;
+  const LAST_NAME = hostData.lastName;
+  const STREET_NUMBER = hostData.streetNum;
+  const STREET_NAME = hostData.streetName;
+  const ZIP_CODE = hostData.zip;
+  const USERNAME = hostData.userName;
+  const PASSWORD= hostData.password;
+  const OPTIONAL_DETAILS = hostData.optional;
+  return Host.sync().then(function(){
+    return Host.findOrCreate(
+      {
+        where: {
+          USERNAME:hostData.userName.trim()
+        },
+        defaults:{
+          FIRST_NAME : FIRST_NAME, LAST_NAME: LAST_NAME, STREET_NUMBER:STREET_NUMBER,STREET_NAME:STREET_NAME,ZIP_CODE:ZIP_CODE,USERNAME:USERNAME,PASSWORD:PASSWORD,OPTIONAL_DETAILS:OPTIONAL_DETAILS
+        }
+      });
+  }).spread(function(result, created){
+    var hostId = result.dataValues.id;
+    console.log("FROM DB : INSERTED GUEST DATA TO HOST TABLE ", hostId);
+    return hostId;
+  });
+}
+
+const insertIntoHostingSession = function(hostingSessionData, hostId) {
+  const DATE = hostingSessionData.date;
+  const START_TIME = hostingSessionData.start;
+  const END_TIME = hostingSessionData.end;
+  return Hosting_Session.sync().then(function(){
+    Hosting_Session.create({DATE:DATE, START_TIME:START_TIME, END_TIME:END_TIME,host_id:hostId});
+  }).then(function(result){
+    console.log("FROM DB : INSERTED GUEST DATA TO HOSTING SESSIONS TABLE");
+  });
+}
+
 
 
 module.exports.Guest = Guest;
 module.exports.Host = Host;
 module.exports.Hosting_Session = Hosting_Session;
+module.exports.insertIntoGuest = insertIntoGuest;
+module.exports.insertIntoHost = insertIntoHost;
+module.exports.insertIntoHostingSession=insertIntoHostingSession;
 
 
