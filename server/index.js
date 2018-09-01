@@ -27,7 +27,17 @@ app.post('/api/guests/search', (req, res) => {
 	console.log('body...', req.body);
 	res.json(data.slice(0, 6));
 });
+//testing insert into guest
+var guestData = {};
+  guestData.firstName = 'freemanFans';
+  guestData.lastName = 'forever';
+  guestData.streetNum = 680;
+  guestData.streetName = 'street name';
+  guestData.zip = 30080;
+  guestData.userName = 'fff';
+  guestData.password = 'abcd';
+  guestData.purpose = 'netflix';
 
-
+//db.insertIntoGuest(guestData);
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
