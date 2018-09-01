@@ -1,4 +1,4 @@
-// HostDash.jsx
+import React from 'react';
 
 class HostDashboard extends React.Component {
   constructor(props) {

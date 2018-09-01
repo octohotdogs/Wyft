@@ -1,7 +1,8 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-// import GuestDash from './components/GuestDashboard.jsx';
+import GuestDashboard from './components/GuestDash.jsx';
 // import HostDash from './components/HostDashboard.jsx';
 // import COMPONENT from './components/COMPONENTNAME.jsx';
 
@@ -23,25 +24,27 @@ class App extends React.Component {
 
     // returns a list of hosts with the same zip code
 
-    // $.ajax({
-    //   type: 'GET',
-    //   url: '',
-    //   data: JSON.stringify({ 'data' : zipCode }),
-    //   contentType: 'application/json',
+    $.ajax({
+      type: 'GET',
+      url: '',
+      data: JSON.stringify({ 'data' : zipCode }),
+      contentType: 'application/json',
 
-    //   success: function(data) {
-    //     // on success
-    //       // returns a list of hosts with matching zip codes
-    //   },
+      success: function(data) {
+        console.log('🌸 client/src/index.jsx');
+        // on success
+          // returns a list of hosts with matching zip codes
+      },
 
-    //   error: function(err) {
-    //     // potentional error, no matching zipcodes?
+      error: function(err) {
+        console.log('🤮 client/src/index.jsx');
+        // potentional error, no matching zipcodes?
 
-    //     // returns a notification along the lines of
-    //       // "Either we messed up or you have a very lonely zip code. Regardless, we're sorry!"
+        // returns a notification along the lines of
+          // "Either we messed up or you have a very lonely zip code. Regardless, we're sorry!"
 
-    //   }
-    // })
+      }
+    });
 
   }
 
@@ -77,6 +80,22 @@ class App extends React.Component {
   //   })
   }
 
+  render() {
+    // default is Guest dashboard
+      // Guest MVP is a page with an input with a `search` button
+        // includes a button to switch to 'Host' dashboard
+      // Host MVP is a page with four inputs (availability, zip code, contact info, optional gift) and a `submit` button
+        // includes a button to switch to 'Guest' dashboard
+    return (<div>
+              <h1>wyft</h1>
+                <h4>your friend with wifi</h4>
+
+            </div>)
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('app'));
+
 
 
 
@@ -87,8 +106,9 @@ class App extends React.Component {
       // Host MVP is a page with four inputs (availability, zip code, contact info, optional gift) and a `submit` button
         // includes a button to switch to 'Guest' dashboard
     return (<div>
-              <h1>wyft</h1>
-                <h4>your friend with wifi</h4>
+            <h1>wyft</h1>
+            <h4>your friend with wifi</h4>
+            <GuestDashboard searchZip={this.searchZipCodes}/>
 
             </div>)
   }
