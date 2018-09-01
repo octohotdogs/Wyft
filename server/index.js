@@ -2,6 +2,7 @@ const express = require('express');
 var bodyParser = require('body-parser');
 const data = require('./../data/host_addresses.json');
 const app = express();
+const hosts = require('./controllers/hosts.js');
 
 // recommendation, explanation is fuzzy, ask NFD >
 
@@ -29,36 +30,18 @@ app.post('/api/guests/search', (req, res) => {
 
 // host crud
 app.route('/api/hosts')
-	.get((req, res) => {
-		res.json(data);
+	.get((req, res) => {		
+		hosts.get(req, res, data, null)
 	})
-	.post((req, res) => {
-		console.log('body...',req.body);
-		var successMsg = {"message": "Thanks for hosting your wifi with us"}
-		res.json(successMsg);		
-	});
+	.post(hosts.post);
 
 app.route('/api/hosts/:hostId')
-	.get((req, res) => {
+	.get( (req, res) => {
 		var hostId = req.params['hostId'];
-		// TODO
-		// find the host from db
-		res.json({hostId: hostId});
+		hosts.get(req, res, data, hostId);
 	})
-	.put((req, res) => {
-		var hostId = req.params['hostId'];
-		var host = req.body;
-		//TODO 
-		// save the new host info to db
-		res.json({hostId: hostId});
-	})
-	.delete((req, res) => {
-		//TODO 1. get the host info from db, delete it
-		res.json({hostId: hostId});
-	})
-
-// guest
-
+	.put( hosts.put )
+	.delete( hosts.delete )
 
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
