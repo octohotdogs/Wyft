@@ -69,7 +69,7 @@ const insertIntoGuest = function(guestData) {
   });
 }
 
-const insertIntoHost = function(hostData) {
+const insertIntoHost = function(hostData, cb) {
   const FIRST_NAME = hostData.firstName;
   const LAST_NAME = hostData.lastName;
   const STREET_NUMBER = hostData.streetNum;
@@ -91,6 +91,7 @@ const insertIntoHost = function(hostData) {
   }).spread(function(result, created){
     var hostId = result.dataValues.id;
     console.log("FROM DB : INSERTED GUEST DATA TO HOST TABLE ", hostId);
+    cb("FROM DB : SUCCESSFULLY INSERTED DATA INTO HOSTS");
     return hostId;
   });
 }
@@ -106,6 +107,16 @@ const insertIntoHostingSession = function(hostingSessionData, hostId) {
   });
 }
 
+const fetchAvailableSessionDetails = function(zipCode) {
+  //fetch all available hosting sessions
+  //sort it by time
+  //filter by zipcopde
+  return Hosting_Session.sync().then(function(){
+     Hosting_Session.findAll().then(function(data){
+      console.log("from finall ", data[0]);
+     })
+  })
+}
 
 
 module.exports.Guest = Guest;
@@ -114,5 +125,6 @@ module.exports.Hosting_Session = Hosting_Session;
 module.exports.insertIntoGuest = insertIntoGuest;
 module.exports.insertIntoHost = insertIntoHost;
 module.exports.insertIntoHostingSession=insertIntoHostingSession;
+module.exports.fetchAvailableSessionDetails = fetchAvailableSessionDetails;
 
 
