@@ -20,9 +20,9 @@ var post = (req, res, db) => {
 	// 	var successMsg = {"message": "Thanks for hosting your wifi with us"}
 	// 	res.json(successMsg);			
 	// });
-	db.insertIntoHost(hostData, (msg) => {
+	db.insertIntoHost(hostData, (data) => {
 		//var successMsg = {"message": "Thanks for hosting your wifi with us"}	
-		res.json(msg);	
+		res.json(data);	
 	});
 			
 }
