@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import GuestDashboard from './components/GuestDash.jsx';
-// import HostDash from './components/HostDashboard.jsx';
+import HostDashboard from './components/HostDashboard.jsx';
 // import COMPONENT from './components/COMPONENTNAME.jsx';
 
 class App extends React.Component {
@@ -56,10 +56,6 @@ class App extends React.Component {
 
   selectHostDash() {
     // button to select the Host Dashboard
-    // changes the value of state to
-      {
-
-      }
 
   }
 
@@ -106,6 +102,7 @@ class App extends React.Component {
             <h1>wyft</h1>
             <h4>your friend with wifi</h4>
             <GuestDashboard searchZip={this.searchZipCodes}/>
+            <HostDashboard accessHostDash={this.selectHostDash} />
 
             </div>)
   }
