@@ -53,7 +53,7 @@ Guest.sync();
 Host.sync();
 Hosting_Session.sync();
 
-const insertIntoGuest = function(guestData) {
+const insertIntoGuest = function(guestData, cb) {
   const FIRST_NAME = guestData.firstName;
   const LAST_NAME = guestData.lastName;
   const STREET_NUMBER = guestData.streetNum;
@@ -63,9 +63,12 @@ const insertIntoGuest = function(guestData) {
   const PASSWORD= guestData.password;
   const PRIMARY_PURPOSE = guestData.purpose;
   return Guest.sync().then(function(){
-    Guest.create({FIRST_NAME : FIRST_NAME, LAST_NAME: LAST_NAME, STREET_NUMBER:STREET_NUMBER,STREET_NAME:STREET_NAME,ZIP_CODE:ZIP_CODE,USERNAME:USERNAME,PASSWORD:PASSWORD,PRIMARY_PURPOSE:PRIMARY_PURPOSE});
-  }).then(function(result){
-    console.log("FROM DB : INSERTED GUEST DATA TO GUEST TABLE");
+    Guest
+    .create({FIRST_NAME : FIRST_NAME, LAST_NAME: LAST_NAME, STREET_NUMBER:STREET_NUMBER,STREET_NAME:STREET_NAME,ZIP_CODE:ZIP_CODE,USERNAME:USERNAME,PASSWORD:PASSWORD,PRIMARY_PURPOSE:PRIMARY_PURPOSE})
+    .then(function(result){
+      cb(result);
+      //console.log("FROM DB : INSERTED GUEST DATA TO GUEST TABLE");
+    });
   });
 }
 
@@ -105,7 +108,7 @@ const insertIntoHostingSession = function(hostingSessionData, hostId, cb) {
       .create({DATE:DATE, START_TIME:START_TIME, END_TIME:END_TIME,host_id:hostId})
       .then(function(result){
         cb(result)
-        console.log("FROM DB : INSERTED GUEST DATA TO HOSTING SESSIONS TABLE");
+        //console.log("FROM DB : INSERTED GUEST DATA TO HOSTING SESSIONS TABLE");
       })
   });
 }
