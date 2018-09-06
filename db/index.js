@@ -96,14 +96,17 @@ const insertIntoHost = function(hostData, cb) {
   });
 }
 
-const insertIntoHostingSession = function(hostingSessionData, hostId) {
+const insertIntoHostingSession = function(hostingSessionData, hostId, cb) {
   const DATE = hostingSessionData.date;
   const START_TIME = hostingSessionData.start;
   const END_TIME = hostingSessionData.end;
   return Hosting_Session.sync().then(function(){
-    Hosting_Session.create({DATE:DATE, START_TIME:START_TIME, END_TIME:END_TIME,host_id:hostId});
-  }).then(function(result){
-    console.log("FROM DB : INSERTED GUEST DATA TO HOSTING SESSIONS TABLE");
+    Hosting_Session
+      .create({DATE:DATE, START_TIME:START_TIME, END_TIME:END_TIME,host_id:hostId})
+      .then(function(result){
+        cb(result)
+        console.log("FROM DB : INSERTED GUEST DATA TO HOSTING SESSIONS TABLE");
+      })
   });
 }
 
