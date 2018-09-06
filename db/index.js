@@ -90,8 +90,8 @@ const insertIntoHost = function(hostData, cb) {
       });
   }).spread(function(result, created){
     var hostId = result.dataValues.id;
-    console.log("FROM DB : INSERTED GUEST DATA TO HOST TABLE ", hostId);
-    cb("FROM DB : SUCCESSFULLY INSERTED DATA INTO HOSTS");
+    //console.log("FROM DB : INSERTED GUEST DATA TO HOST TABLE ", hostId);
+    cb(result);
     return hostId;
   });
 }
