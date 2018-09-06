@@ -77,6 +77,10 @@ app.post('/api/hosts/:hostId/sessions', (req, res) => {
 });
 
 // host session crud
+app.post('/api/host_sessions/search', (req, res) => {
+	hostSessions.search(req, res, db);
+});
+
 // app.route('/api/host_sessions')
 // 	.get((req, res) => {		
 // 		hostSessions.get(req, res, db, null)

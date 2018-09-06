@@ -12,5 +12,11 @@ var post = (req, res, db, hostId) => {
 	res.json('success');		
 }
 
+var search = (req, res, db) => {
+	var data = req.body;
+	var zipCode = data['zipCode'];
+	db.fetchAvailableSessionDetails(zipCode)
+	res.json('success');
+}
 
 module.exports.post = post;
