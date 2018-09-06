@@ -10,15 +10,29 @@ var get = (req, res, data, id) => {
 
 var post = (req, res, db) => {
 	//console.log('body...',req.body);
-	var hostData = req.body
+	var hostData = req.body;
+	// var hostData = {
+	// 	"firstName": "roland",
+	// 	"lastName": "chan",
+	// 	"streetNum": 123,
+	// 	"userName": "icecream",
+	// 	"streetName": "street name",
+	// 	"zip": 91293,
+	// 	"userName": "ccc",
+	// 	"password": "abcd",
+	// 	"optional": "netflix"
+	// }
+
 	// TODO add cb
 	// db.insertIntoHost(hostData, (err, data) => {
 	// 	var successMsg = {"message": "Thanks for hosting your wifi with us"}
 	// 	res.json(successMsg);			
 	// });
-	db.insertIntoHost(hostData);
-	var successMsg = {"message": "Thanks for hosting your wifi with us"}
-	res.json(successMsg);				
+	db.insertIntoHost(hostData, (msg) => {
+		//var successMsg = {"message": "Thanks for hosting your wifi with us"}	
+		res.json(msg);	
+	});
+			
 }
 
 var put = (req, res) => {
