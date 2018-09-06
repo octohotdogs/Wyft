@@ -4,9 +4,10 @@ var get = (req, res, db, id) => {
 		// find the host from db
 		res.json({id: id});		
 	} else {
-		db.fetchAvailableSessionDetails('', function(result){
-			res.json(result)
-		})		
+		// TODO
+		// db.fetchAvailableSessionDetails('', function(result){
+		// 	res.json(result)
+		// })		
 	}
 }
 
