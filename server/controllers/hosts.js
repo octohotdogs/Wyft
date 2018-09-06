@@ -1,27 +1,18 @@
-var get = (req, res, data, id) => {
+var get = (req, res, db, id) => {
 	if(id) {
 		// TODO
 		// find the host from db
 		res.json({id: id});		
 	} else {
-		res.json(data)
+		db.fetchAvailableSessionDetails('', function(result){
+			res.json(result)
+		})		
 	}
 }
 
 var post = (req, res, db) => {
 	//console.log('body...',req.body);
 	var hostData = req.body;
-	// var hostData = {
-	// 	"firstName": "roland",
-	// 	"lastName": "chan",
-	// 	"streetNum": 123,
-	// 	"userName": "icecream",
-	// 	"streetName": "street name",
-	// 	"zip": 91293,
-	// 	"userName": "ccc",
-	// 	"password": "abcd",
-	// 	"optional": "netflix"
-	// }
 
 	// TODO add cb
 	// db.insertIntoHost(hostData, (err, data) => {

@@ -55,7 +55,7 @@ app.post('/api/guests/search', (req, res) => {
 // host crud
 app.route('/api/hosts')
 	.get((req, res) => {		
-		hosts.get(req, res, data, null)
+		hosts.get(req, res, db, null)
 	})
 	.post((req, res) => {
 		hosts.post(req, res, db)
