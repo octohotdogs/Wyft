@@ -1,24 +1,30 @@
-var get = (req, res, data, id) => {
+var get = (req, res, db, id) => {
 	if(id) {
 		// TODO
 		// find the host from db
 		res.json({id: id});		
 	} else {
-		res.json(data)
+		// TODO
+		// db.fetchAvailableSessionDetails('', function(result){
+		// 	res.json(result)
+		// })		
 	}
 }
 
 var post = (req, res, db) => {
 	//console.log('body...',req.body);
-	var hostData = req.body
+	var hostData = req.body;
+
 	// TODO add cb
 	// db.insertIntoHost(hostData, (err, data) => {
 	// 	var successMsg = {"message": "Thanks for hosting your wifi with us"}
 	// 	res.json(successMsg);			
 	// });
-	db.insertIntoHost(hostData);
-	var successMsg = {"message": "Thanks for hosting your wifi with us"}
-	res.json(successMsg);				
+	db.insertIntoHost(hostData, (msg) => {
+		//var successMsg = {"message": "Thanks for hosting your wifi with us"}	
+		res.json(msg);	
+	});
+			
 }
 
 var put = (req, res) => {

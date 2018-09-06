@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const orm = new Sequelize('wyft', 'root', '', {
+const orm = new Sequelize('wyft', 'root', 'password', {
   host:'localhost',
   dialect: 'mysql',
 
@@ -109,15 +109,16 @@ const insertIntoHostingSession = function(hostingSessionData, hostId) {
 
 
 
-const fetchAvailableSessionDetails = function(zipCode) {
+const fetchAvailableSessionDetails = function(zipCode, cb) {
   //fetch all available hosting sessions
   //sort it by time
   //filter by zipcopde
   return Hosting_Session.sync().then(function(){
      Hosting_Session.findAll({order:[['START_TIME','ASC']],include:[{model:Host,as:'theHost'}]}).then(function(data){
       var sessionData = data.map(e => e.dataValues);
-      console.log("from findAll session data ", sessionData);
-      console.log("from findAll host data", sessionData.map(e => e.theHost.dataValues));
+      cb(sessionData);
+      // console.log("from findAll session data ", sessionData);
+      // console.log("from findAll host data", sessionData.map(e => e.theHost.dataValues));
      });
   })
 }

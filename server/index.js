@@ -7,6 +7,7 @@ const db = require('../db/index.js');
 
 const app = express();
 const hosts = require('./controllers/hosts.js');
+const hostSessions = require('./controllers/host_sessions.js');
 
 // recommendation, explanation is fuzzy, ask NFD >
 
@@ -32,7 +33,6 @@ app.post('/api/guests/search', (req, res) => {
 	res.json(data.slice(0, 6));
 });
 
-
 //testing insert into guest
 // var guestData = {};
 // guestData.firstName = 'freemanFans';
@@ -55,20 +55,46 @@ app.post('/api/guests/search', (req, res) => {
 
 // host crud
 app.route('/api/hosts')
-	.get((req, res) => {
-		hosts.get(req, res, data, null)
+	.get((req, res) => {		
+		hosts.get(req, res, db, null)
 	})
 	.post((req, res) => {
 		hosts.post(req, res, db)
 	});
 
-app.route('/api/hosts/:hostId')
-	.get( (req, res) => {
-		var hostId = req.params['hostId'];
-		hosts.get(req, res, data, hostId);
-	})
-	.put( hosts.put )
-	.delete( hosts.delete )
+// app.route('/api/hosts/:hostId')
+// 	.get( (req, res) => {
+// 		var hostId = req.params['hostId'];
+// 		hosts.get(req, res, data, hostId);
+// 	})
+// 	.put( hosts.put )
+// 	.delete( hosts.delete )
 
+// create new session for a host
+app.post('/api/hosts/:hostId/sessions', (req, res) => {
+	var hostId = req.params.hostId;
+	hostSessions.post(req, res, db, hostId);
+});
+
+// host session crud
+app.post('/api/host_sessions/search', (req, res) => {
+	hostSessions.search(req, res, db);
+});
+
+// app.route('/api/host_sessions')
+// 	.get((req, res) => {		
+// 		hostSessions.get(req, res, db, null)
+// 	})
+	// .post((req, res) => {
+	// 	hostSessions.post(req, res, db)
+	// });
+
+// app.route('/api/host_sessions/:hostId')
+// 	.get( (req, res) => {
+// 		var hostId = req.params['hostId'];
+// 		hostSessions.get(req, res, data, hostId);
+// 	})
+// 	.put( hostSessions.put )
+// 	.delete( hostSessions.delete )
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
