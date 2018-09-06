@@ -15,8 +15,21 @@ var post = (req, res, db, hostId) => {
 var search = (req, res, db) => {
 	var data = req.body;
 	var zipCode = data['zipCode'];
-	db.fetchAvailableSessionDetails(zipCode)
-	res.json('success');
+	db.fetchAvailableSessionDetails(zipCode, (data) => {
+		res.json(data);
+	})
+	//console.log(db.fetchAvailableSessionDetails(zipCode));
+	// return new Promise(function(resolve, reject){
+	// 	resolve(db.fetchAvailableSessionDetails(zipCode));
+	// }).then((data) => {
+	// 	console.log('from host sessions controller 3',data);
+	// 	res.json(data);					
+	// })
+	// return db.fetchAvailableSessionDetails(zipCode).then((data) => {
+	// 	console.log('from host sessions controller 2',data);
+	// 	res.json(data);			
+	// })	
 }
 
 module.exports.post = post;
+module.exports.search = search;
