@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
@@ -13,20 +12,27 @@ class App extends React.Component {
       // how do we set state with
         // hosts
         // guests
+
+      // default is Guest, so `state` starts off as a zipCode input from the Guest zip code search
+      zipCode: ''
     }
+
+    this.searchZipCodes = this.searchZipCodes.bind(this);
+    this.selectHostDash = this.selectHostDash.bind(this);
+    this.addHost = this.addHost.bind(this);
   }
 
   searchZipCodes(zipCode) {
-    // ajax GET
-    // takes in a string? or a number?
+    // ajax POST
+    // takes in a string
 
     // guest puts their zip code in the input, clicks 'search' button
 
     // returns a list of hosts with the same zip code
 
     $.ajax({
-      type: 'GET',
-      url: '',
+      type: 'POST',
+      url: 'http://localhost:3000/api/guests/search',
       data: JSON.stringify({ 'data' : zipCode }),
       contentType: 'application/json',
 
@@ -48,6 +54,15 @@ class App extends React.Component {
 
   }
 
+  selectHostDash() {
+    // button to select the Host Dashboard
+    // changes the value of state to
+      {
+
+      }
+
+  }
+
   addHost(avail, zip, contact, gift) {
     // ajax POST
 
@@ -62,7 +77,7 @@ class App extends React.Component {
 
   //   $.ajax({
   //     type: 'POST',
-  //     url: '',
+  //     url: 'http://localhost:3000/api/hosts',
   //     data: JSON.stringify({
   //       'availability' : avail,
   //       'zip'          : zip,
@@ -79,24 +94,6 @@ class App extends React.Component {
   //     }
   //   })
   }
-
-  render() {
-    // default is Guest dashboard
-      // Guest MVP is a page with an input with a `search` button
-        // includes a button to switch to 'Host' dashboard
-      // Host MVP is a page with four inputs (availability, zip code, contact info, optional gift) and a `submit` button
-        // includes a button to switch to 'Guest' dashboard
-    return (<div>
-              <h1>wyft</h1>
-                <h4>your friend with wifi</h4>
-
-            </div>)
-  }
-}
-
-ReactDOM.render(<App />, document.getElementById('app'));
-
-
 
 
   render() {
