@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import GuestDashboard from './components/GuestDash.jsx';
-import HostDashboard from './components/HostDashboard.jsx';
+import HostDashboard from './components/HostDash.jsx';
 // import COMPONENT from './components/COMPONENTNAME.jsx';
 
 class App extends React.Component {

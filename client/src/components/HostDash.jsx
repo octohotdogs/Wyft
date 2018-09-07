@@ -10,6 +10,9 @@ class HostDashboard extends React.Component {
 
 
   render() {
+    return (<div>
+              <h6>host dash here</h6>
+            </div>)
 
   }
 }
