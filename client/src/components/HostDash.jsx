@@ -19,7 +19,7 @@ class HostDashboard extends React.Component {
       data: JSON.stringify({data: host}),
       contentType: 'application/json',
       success: function(data){
-        console.log(data)
+        console.log('success inserted',data)
       },
       error: function(err){
         console.log(err);

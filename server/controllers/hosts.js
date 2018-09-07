@@ -14,7 +14,6 @@ var get = (req, res, db, id) => {
 var post = (req, res, db) => {
 	//console.log('body...',req.body);
 	var hostData = req.body.data;
-	console.log('inserting....', hostData);
 	// TODO add cb
 	// db.insertIntoHost(hostData, (err, data) => {
 	// 	var successMsg = {"message": "Thanks for hosting your wifi with us"}
