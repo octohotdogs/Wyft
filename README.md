@@ -45,14 +45,18 @@ Turn on the server, go to localhost:3000
 - Host
  1. POST request (create a new host)
   ```javascript
-   $.ajax({
-   	  url: "/api/hosts",
-   	  type: "POST",
-   	  data: {"zipcode": "91234"},
-   	  contentType: 'application/json'
-   	}).done((msg) => {
-   		console.log(msg)
-   	});
+    $.ajax({
+      type: 'POST',
+      url: '/api/hosts',
+      data: JSON.stringify({data: host}),
+      contentType: 'application/json',
+      success: function(data){
+        console.log(data)
+      },
+      error: function(err){
+        console.log(err);
+      }
+    })
  ```
 
 ## Requirements
