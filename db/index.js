@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const orm = new Sequelize('wyft', 'root', 'password', {
+const orm = new Sequelize('wyft', 'root', '', {
   host:'localhost',
   dialect: 'mysql',
 
