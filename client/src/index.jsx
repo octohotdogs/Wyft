@@ -14,7 +14,10 @@ class App extends React.Component {
         // guests
 
       // default is Guest, so `state` starts off as a zipCode input from the Guest zip code search
-      zipCode: ''
+      guest            : true,
+      zipcode          : '',
+      availableHosts   : []
+
     }
 
     this.searchZipCodes = this.searchZipCodes.bind(this);
