@@ -1,4 +1,5 @@
 import React from 'react';
+import HostDashAddHost from './HostDashAddHost.jsx';
 
 class HostDashboard extends React.Component {
   constructor(props) {
@@ -8,12 +9,13 @@ class HostDashboard extends React.Component {
     }
   }
 
-
   render() {
-    return (<div>
-              <h6>host dash here</h6>
-            </div>)
-
+    return (
+      <div>
+        <h6>host dash here</h6>
+        <HostDashAddHost />
+      </div>
+    );
   }
 }
 
