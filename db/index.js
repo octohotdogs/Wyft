@@ -137,7 +137,12 @@ const fetchAllHosts = function(cb) {
   });
 }
 
-
+const fetchSessionDetailsForHost = function(hostID, cb) {
+  Hosting_Session.findAll({where:{host_id:hostID}}).then(function(data){
+      var sessionData = data.map(e => e.dataValues);
+      cb(sessionData);
+  });
+}
 
 
 module.exports.Guest = Guest;
@@ -148,5 +153,6 @@ module.exports.insertIntoHost = insertIntoHost;
 module.exports.insertIntoHostingSession=insertIntoHostingSession;
 module.exports.fetchAvailableSessionDetails = fetchAvailableSessionDetails;
 module.exports.fetchAllHosts = fetchAllHosts;
+module.exports.fetchSessionDetailsForHost = fetchSessionDetailsForHost;
 
 
