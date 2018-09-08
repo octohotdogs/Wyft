@@ -19,7 +19,7 @@ class HostResultsList extends React.Component {
   render() {
     return(
       <div>
-        {
+        {          
           this.state.availableHosts.map(host => <HostResultsListItem key={host.id} data={host}/>)
         }
       </div>      

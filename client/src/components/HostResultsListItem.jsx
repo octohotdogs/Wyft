@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 class HostResultsListItem extends React.Component {
 	constructor(props){
@@ -8,9 +9,11 @@ class HostResultsListItem extends React.Component {
 	render(){
 		return(
 			<div>
-				<div>
-					{this.props.data.FIRST_NAME}
-				</div>
+				<Link to={`/hosts/${this.props.data.id}`}>
+					<div>
+						{this.props.data.FIRST_NAME}
+					</div>
+				</Link>
 			</div>
 		)
 	}
