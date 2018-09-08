@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import GuestDashboard from './components/GuestDash.jsx';
 import HostDashboard from './components/HostDash.jsx';
+import Navigation from './components/Navigation.jsx';
 // import COMPONENT from './components/COMPONENTNAME.jsx';
 
 class App extends React.Component {
@@ -101,13 +103,23 @@ class App extends React.Component {
         // includes a button to switch to 'Host' dashboard
       // Host MVP is a page with four inputs (availability, zip code, contact info, optional gift) and a `submit` button
         // includes a button to switch to 'Guest' dashboard
-    return (<div>
-            <h1>wyft</h1>
-            <h4>your friend with wifi</h4>
-            <GuestDashboard searchZip={this.searchZipCodes}/>
-            <HostDashboard accessHostDash={this.selectHostDash} />
-
-            </div>)
+    return (
+      <Router>
+        <div>      
+          <Navigation/>
+          <h1>wyft</h1>
+          <h4>your friend with wifi</h4>            
+          <Switch>
+            <Route exact path="/" render={(props) => (
+              <GuestDashboard searchZip={this.searchZipCodes}/>
+              )} />       
+            <Route exact path="/host" render={(props) => (
+              <HostDashboard accessHostDash={this.selectHostDash} />
+            )} />                        
+          </Switch>
+        </div>
+      </Router>
+    )
   }
 }
 
