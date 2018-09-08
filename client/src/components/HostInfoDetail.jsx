@@ -6,6 +6,8 @@
 
 import React from 'react';
 import $ from 'jquery';
+import SessionsAdd  from './SessionsAdd.jsx'
+import {Link} from 'react-router-dom';
 
 class HostInfoDetail extends React.Component {
 	constructor(props) {
@@ -32,6 +34,9 @@ class HostInfoDetail extends React.Component {
 			// Use .map to render all the Host sessions
 			<div>
 				Hello world {this.props.hostId}
+				<Link to={`/hosts/${this.state.hostId}/sessions/new`}>
+					Add session
+				</Link>
 			</div>
 		)
 	}
