@@ -1,6 +1,6 @@
 var post = (req, res, db, hostId) => {
 	//console.log('body...',req.body);
-	var hostingSessionData = req.body;
+	var hostingSessionData = req.body.data;
 	//var hostId = req.body.hostId;
 
 	// TODO add cb
