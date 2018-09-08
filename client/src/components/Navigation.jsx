@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Menu } from 'semantic-ui-react';
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -14,21 +15,17 @@ class Navigation extends React.Component {
 
   render() {
     return (
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Guest</Link>
-          </li>
-          <li>
-            <Link to="/hosts" onClick={this.handleClickedHost}>
-              Hosts
-            </Link>
-          </li>
-          <li>
-            <Link to="/host/new">New Host</Link>
-          </li>
-        </ul>
-      </div>
+      <Menu>
+        <Menu.Item as={Link} to="/">
+          Guest
+        </Menu.Item>
+        <Menu.Item as={Link} to="/hosts" onClick={this.handleClickedHost}>
+          Hosts
+        </Menu.Item>
+        <Menu.Item as={Link} to="/host/new">
+          New Host
+        </Menu.Item>
+      </Menu>
     );
   }
 }

@@ -9,6 +9,7 @@ import HostInfoDetail from './components/HostInfoDetail.jsx';
 import Navigation from './components/Navigation.jsx';
 // import COMPONENT from './components/COMPONENTNAME.jsx';
 // import COMPONENT from './components/COMPONENTNAME.jsx';
+import { Container, Segment } from 'semantic-ui-react';
 
 class App extends React.Component {
   constructor(props) {
@@ -104,41 +105,47 @@ class App extends React.Component {
     // Host MVP is a page with four inputs (availability, zip code, contact info, optional gift) and a `submit` button
     // includes a button to switch to 'Guest' dashboard
     return (
-      <Router>
-        <div>
-          <Navigation getHosts={this.getHosts} />
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={props => (
-                <GuestDashboard searchZip={this.searchZipCodes} />
-              )}
-            />
-            <Route
-              exact
-              path="/hosts"
-              render={props => <HostDashboard data={this.state.hosts} />}
-            />
-            <Route
-              exact
-              path="/host/new"
-              render={props => <HostDashAddHost addHost={this.addHost} />}
-            />
-            <Route
-              exact
-              path="/hosts/:host_id"
-              render={props => {
-                let hostPosition = props.location.pathname.replace(
-                  '/hosts/',
-                  ''
-                );
-                return <HostInfoDetail hostId={hostPosition} />;
-              }}
-            />
-          </Switch>
-        </div>
-      </Router>
+      <Container>
+        <Router>
+          <div>
+            <Navigation getHosts={this.getHosts} />
+            <div className="wrapper">
+              <h1 className="ui huge header">Wyft</h1>
+              <h5>Like CouchSurfing, but for WiFi.</h5>
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={props => (
+                    <GuestDashboard searchZip={this.searchZipCodes} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/hosts"
+                  render={props => <HostDashboard data={this.state.hosts} />}
+                />
+                <Route
+                  exact
+                  path="/host/new"
+                  render={props => <HostDashAddHost addHost={this.addHost} />}
+                />
+                <Route
+                  exact
+                  path="/hosts/:host_id"
+                  render={props => {
+                    let hostPosition = props.location.pathname.replace(
+                      '/hosts/',
+                      ''
+                    );
+                    return <HostInfoDetail hostId={hostPosition} />;
+                  }}
+                />
+              </Switch>
+            </div>
+          </div>
+        </Router>
+      </Container>
     );
   }
 }
