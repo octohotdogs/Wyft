@@ -6,32 +6,21 @@ class HostDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // state is something in relation to props
+      data: []
     }
-    this.createHost = this.createHost.bind(this);
   }
 
-
-  createHost(host) {
-    $.ajax({
-      type: 'POST',
-      url: '/api/hosts',
-      data: JSON.stringify({data: host}),
-      contentType: 'application/json',
-      success: function(data){
-        console.log('success inserted',data)
-      },
-      error: function(err){
-        console.log(err);
-      }
-    })
+  componentDidUpdate(prevProps) {
+    if(this.state.data !== prevProps.data) {      
+      this.setState({data: this.props.data});
+    }
   }
 
   render() {
     return (
       <div>
         <h6>host dash here</h6>
-        <HostDashAddHost createHost={this.createHost}/>
+        {this.state.data.length}
       </div>
     );
   }
