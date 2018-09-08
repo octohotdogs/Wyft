@@ -5,11 +5,17 @@
     // optional gift
 
 import React from 'react';
+class HostInfoDetail extends React.Component {
+	constructor(props) {
+		super(props)
+	}
 
-const HostInfoDetail = (props) => {
-  <div>
-
-  </div>
+	render(){
+		return(
+			<div>
+				Hello world {this.props.hostId}
+			</div>
+		)
+	}
 }
-
 export default HostInfoDetail;
