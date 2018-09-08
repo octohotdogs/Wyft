@@ -33,7 +33,7 @@ class App extends React.Component {
     this.getHosts = this.getHosts.bind(this);
   }
 
-  searchZipCodes(zipCode) {
+  searchZipCodes(zipCode, cb) {
     // ajax POST
     // takes in a string
 
@@ -49,7 +49,7 @@ class App extends React.Component {
 
       success: function(data) {
         //console.log('🌸 client/src/index.jsx');
-        console.log(data)
+        cb(data)
         // on success
           // returns a list of hosts with matching zip codes
       },
