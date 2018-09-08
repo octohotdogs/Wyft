@@ -129,8 +129,12 @@ const fetchAvailableSessionDetails = function(zipCode, cb) {
   })
 }
 
-const getHostInfo = function(hostIDs) {
-  return Host.sync().then()
+const fetchAllHosts = function(cb) {
+  return Host.sync().then(function(){
+    Host.findAll().then(function(data){
+      cb(data);
+    })
+  });
 }
 
 
@@ -143,5 +147,6 @@ module.exports.insertIntoGuest = insertIntoGuest;
 module.exports.insertIntoHost = insertIntoHost;
 module.exports.insertIntoHostingSession=insertIntoHostingSession;
 module.exports.fetchAvailableSessionDetails = fetchAvailableSessionDetails;
+module.exports.fetchAllHosts = fetchAllHosts;
 
 
