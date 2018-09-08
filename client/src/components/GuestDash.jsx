@@ -23,6 +23,7 @@ class GuestDashboard extends React.Component {
 
   search() {
     this.props.searchZip(this.state.zipCode, (data) => {
+      console.log(data);
       this.setState({sessions: data});
     });
   }

@@ -1,10 +1,10 @@
 import React from 'react';
+import SessionsListItem from './SessionsListItem.jsx';
 
 class SessionsList extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			hide: true,
 			data: []			
 		}
 	}
@@ -17,7 +17,11 @@ class SessionsList extends React.Component {
 
 	render(){
 		return (
-			<div>Hello world {this.state.data.length}</div>
+			<div>
+				{
+					this.state.data.map(item => <SessionsListItem key={item.id} data={item}/>)
+				}
+			</div>
 		)
 	}
 }
