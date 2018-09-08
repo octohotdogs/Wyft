@@ -7,6 +7,7 @@ const db = require('../db/index.js');
 
 const app = express();
 const hosts = require('./controllers/hosts.js');
+const guests = require('./controllers/guests.js');
 const hostSessions = require('./controllers/host_sessions.js');
 
 // recommendation, explanation is fuzzy, ask NFD >
@@ -28,29 +29,18 @@ app.use(express.static(__dirname + '/../client/dist'));
 // });
 
 // guest searching endpoint
+// app.post('/api/guests/search', (req, res) => {
+// 	console.log('body...', req.body);
+// 	res.json(data.slice(0, 6));
+// });
+
 app.post('/api/guests/search', (req, res) => {
-	console.log('body...', req.body);
-	res.json(data.slice(0, 6));
+	hostSessions.search(req, res, db);
 });
 
-//testing insert into guest
-// var guestData = {};
-// guestData.firstName = 'freemanFans';
-// guestData.lastName = 'forever';
-// guestData.streetNum = 680;
-// guestData.streetName = 'street name';
-// guestData.zip = 30080;
-// guestData.userName = 'fff';
-// guestData.password = 'abcd';
-// guestData.optional = 'netflix';
-
-// var sessionDummy ={};
-// sessionDummy.date = "01-JAN-2019";
-// sessionDummy.start = "11:00 AM";
-// sessionDummy.end = "1:00 PM";
-
-//db.insertIntoHost(guestData);
-//db.insertIntoHostingSession(sessionDummy,1);
+app.post('/api/guests', (req, res) => {
+	guests.post(req, res, db);
+})
 
 
 // host crud
@@ -74,11 +64,6 @@ app.route('/api/hosts')
 app.post('/api/hosts/:hostId/sessions', (req, res) => {
 	var hostId = req.params.hostId;
 	hostSessions.post(req, res, db, hostId);
-});
-
-// host session crud
-app.post('/api/host_sessions/search', (req, res) => {
-	hostSessions.search(req, res, db);
 });
 
 // app.route('/api/host_sessions')

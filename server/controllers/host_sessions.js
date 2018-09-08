@@ -8,8 +8,9 @@ var post = (req, res, db, hostId) => {
 	// 	var successMsg = {"message": "Thanks for hosting your wifi with us"}
 	// 	res.json(successMsg);			
 	// });
-	db.insertIntoHostingSession(hostingSessionData, hostId);	
-	res.json('success');		
+	db.insertIntoHostingSession(hostingSessionData, hostId, (data) => {
+		res.json(data);		
+	});		
 }
 
 var search = (req, res, db) => {
