@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import GuestDashboard from './components/GuestDash.jsx';
 import HostDashboard from './components/HostDash.jsx';
+import HostDashAddHost from './components/HostDashAddHost.jsx';
+import HostInfoDetail from './components/HostInfoDetail.jsx';
+import Navigation from './components/Navigation.jsx';
 // import COMPONENT from './components/COMPONENTNAME.jsx';
 // import COMPONENT from './components/COMPONENTNAME.jsx';
 
@@ -17,13 +21,15 @@ class App extends React.Component {
       // default is Guest, so `state` starts off as a zipCode input from the Guest zip code search
       guest            : true,
       zipcode          : '',
-      availableHosts   : []
+      availableHosts   : [],
+      hosts: ''
 
     }
 
     this.searchZipCodes = this.searchZipCodes.bind(this);
     this.selectHostDash = this.selectHostDash.bind(this);
     this.addHost = this.addHost.bind(this);
+    this.getHosts = this.getHosts.bind(this);
   }
 
   searchZipCodes(zipCode) {
@@ -41,7 +47,8 @@ class App extends React.Component {
       contentType: 'application/json',
 
       success: function(data) {
-        console.log('🌸 client/src/index.jsx');
+        //console.log('🌸 client/src/index.jsx');
+        console.log(data)
         // on success
           // returns a list of hosts with matching zip codes
       },
@@ -63,7 +70,7 @@ class App extends React.Component {
 
   }
 
-  addHost(avail, zip, contact, gift) {
+  addHost(data) {
     // ajax POST
 
     // takes four strings
@@ -75,26 +82,33 @@ class App extends React.Component {
     // a successful post results in a notification in brower window
       // ex. "Thank you for hosting!"
 
-  //   $.ajax({
-  //     type: 'POST',
-  //     url: 'http://localhost:3000/api/hosts',
-  //     data: JSON.stringify({
-  //       'availability' : avail,
-  //       'zip'          : zip,
-  //       'contactInfo'  : contact,
-  //       'gift'         : gift
-  //     }),
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost:3000/api/hosts',
+      data: JSON.stringify({data: data}),
+      contentType: 'application/json',
+      success: function(data) {
+        console.log(data);
+      },
+      error: function(err) {
 
-  //     success: function(data) {
-
-  //     },
-
-  //     error: function(err) {
-
-  //     }
-  //   })
+      }
+    })
   }
 
+  getHosts() {
+    $.get('/api/hosts', (data) => {
+      console.log(data);
+      this.setState({hosts: data})
+    })      
+  }
+
+  // componentDidMount() {
+  //   $.get('/api/hosts', (data) => {
+  //     console.log(data);
+  //     this.setState({hosts: data})
+  //   })        
+  // }
 
   render() {
     // default is Guest dashboard
@@ -102,11 +116,32 @@ class App extends React.Component {
         // includes a button to switch to 'Host' dashboard
       // Host MVP is a page with four inputs (availability, zip code, contact info, optional gift) and a `submit` button
         // includes a button to switch to 'Guest' dashboard
-    return (<div>
-            <GuestDashboard searchZip={this.searchZipCodes}/>
-            <HostDashboard accessHostDash={this.selectHostDash} />
-
-            </div>)
+    return (
+      <Router>
+        <div>      
+          <Navigation getHosts={this.getHosts}/>
+          <h1>wyft</h1>
+          <h4>your friend with wifi</h4>            
+          <Switch>
+            <Route exact path="/" render={(props) => (
+              <GuestDashboard searchZip={this.searchZipCodes}/>
+              )} />
+            <Route exact path="/hosts" render={ (props) => (
+              <HostDashboard data={this.state.hosts}/>
+            )} />   
+            <Route exact path="/host/new" render={(props) => (
+              <HostDashAddHost addHost={this.addHost} />
+            )} />      
+            <Route exact path="/hosts/:host_id" render={(props) => {
+              let hostPosition = props.location.pathname.replace('/hosts/','');
+              return (
+                <HostInfoDetail hostId={hostPosition}/>
+              )
+            }}/>            
+          </Switch>
+        </div>
+      </Router>
+    )
   }
 }
 

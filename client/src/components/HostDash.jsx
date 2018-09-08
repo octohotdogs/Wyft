@@ -1,19 +1,28 @@
 import React from 'react';
+import $ from 'jquery';
+import HostDashAddHost from './HostDashAddHost.jsx';
+import HostResultsList from './HostResultsList.jsx'
 
 class HostDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // state is something in relation to props
+      data: []
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if(this.props.data !== prevProps.data) {  
+      this.setState({data: this.props.data});
+    }
+  }
 
   render() {
-    return (<div>
-              <h6>host dash here</h6>
-            </div>)
-
+    return (
+      <div>       
+        <HostResultsList availableHosts={this.state.data}/>
+      </div>
+    );
   }
 }
 

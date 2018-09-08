@@ -1,5 +1,6 @@
 import React from 'react';
-import HostInfoDetail from 'HostInfoDetail.jsx';
+import HostResultsListItem from './HostResultsListItem.jsx';
+//import HostInfoDetail from 'HostInfoDetail.jsx';
 
 class HostResultsList extends React.Component {
   constructor(props) {
@@ -9,8 +10,20 @@ class HostResultsList extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if(this.props.availableHosts !== prevProps.availableHosts) {  
+      this.setState({availableHosts: this.props.availableHosts});
+    }
+  }
 
   render() {
+    return(
+      <div>
+        {          
+          this.state.availableHosts.map(host => <HostResultsListItem key={host.id} data={host}/>)
+        }
+      </div>      
+    )
     // renders list of individual Host buttons
     // each element in array is a button
       // when clicked
