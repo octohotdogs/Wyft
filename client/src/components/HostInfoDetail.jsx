@@ -24,6 +24,7 @@ class HostInfoDetail extends React.Component {
 		this.setState({hostId: hostId});
     $.get(`/api/hosts/${hostId}/sessions`, (data) => {      
       this.setState({sessions: data})
+      console.log(data);
     }) 
 	}
 
@@ -33,7 +34,6 @@ class HostInfoDetail extends React.Component {
 			// Create a sessionListItem component
 			// Use .map to render all the Host sessions
 			<div>
-				Hello world {this.props.hostId}
 				<Link to={`/hosts/${this.state.hostId}/sessions/new`}>
 					Add session
 				</Link>
