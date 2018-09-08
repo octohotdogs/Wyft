@@ -35,8 +35,8 @@ app.use(express.static(__dirname + '/../client/dist'));
 // });
 
 app.post('/api/guests/search', (req, res) => {
-	//hostSessions.search(req, res, db);
-	return res.json(host_addressess_data)
+	hostSessions.search(req, res, db);
+	//return res.json(host_addressess_data)
 });
 
 app.post('/api/guests', (req, res) => {
@@ -70,7 +70,6 @@ app.post('/api/hosts/:hostId/sessions', (req, res) => {
 // get session for give host
 app.get('/api/hosts/:hostId/sessions', (req, res) => {
 	var hostId = req.params.hostId;
-	console.log('hello world',hostId)
 	hostSessions.getAll(req, res, db, hostId);
 });
 
