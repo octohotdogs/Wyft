@@ -10,6 +10,10 @@ class HostInfoDetail extends React.Component {
 		super(props)
 	}
 
+	componentDidMount(){
+		console.log(this.props.hostId);
+	}
+
 	render(){
 		return(
 			<div>

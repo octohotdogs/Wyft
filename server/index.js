@@ -67,6 +67,13 @@ app.post('/api/hosts/:hostId/sessions', (req, res) => {
 	hostSessions.post(req, res, db, hostId);	
 });
 
+// get session for give host
+app.get('/api/hosts/:hostId/sessions', (req, res) => {
+	var hostId = req.params.hostId;
+	console.log('hello world',hostId)
+	hostSessions.getAll(req, res, db, hostId);
+});
+
 // app.route('/api/host_sessions')
 // 	.get((req, res) => {		
 // 		hostSessions.get(req, res, db, null)

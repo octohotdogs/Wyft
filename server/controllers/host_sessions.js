@@ -13,6 +13,14 @@ var post = (req, res, db, hostId) => {
 	});		
 }
 
+var getAll = (req, res, db, hostId) => {
+	if(hostId) {
+		db.fetchSessionDetailsForHost(hostId, (data) => {
+			res.json(data);
+		})
+	}
+}
+
 var search = (req, res, db) => {
 	var data = req.body;
 	var zipCode = data['zipCode'];
@@ -32,5 +40,7 @@ var search = (req, res, db) => {
 	// })	
 }
 
+
 module.exports.post = post;
 module.exports.search = search;
+module.exports.getAll = getAll;

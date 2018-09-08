@@ -9,7 +9,7 @@ class HostResultsListItem extends React.Component {
 	render(){
 		return(
 			<div>
-				<Link to={`/hosts/${this.props.data.id}`}>
+				<Link to={`/hosts/${this.props.data.id}`} >
 					<div>
 						{this.props.data.FIRST_NAME}
 					</div>
