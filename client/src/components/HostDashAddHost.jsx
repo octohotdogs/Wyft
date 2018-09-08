@@ -25,8 +25,7 @@ class HostDashAddHost extends React.Component {
   }
 
   onSubmit(){
-  	console.log(this.state);
-  	this.props.createHost(this.state);
+  	this.props.addHost(this.state);
   }
 
   render() {
