@@ -23,6 +23,7 @@ class SessionsAdd extends React.Component {
 
   onSubmit(){
   	this.setState({hostId: this.props.hostId});
+  	console.log(this.state);
   	$.ajax({
   		type: 'POST',
   		url: `/api/hosts/${this.props.hostId}/sessions`,

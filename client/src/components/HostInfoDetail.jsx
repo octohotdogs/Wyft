@@ -6,8 +6,9 @@
 
 import React from 'react';
 import $ from 'jquery';
-import SessionsAdd  from './SessionsAdd.jsx'
 import {Link} from 'react-router-dom';
+import SessionsAdd  from './SessionsAdd.jsx'
+import SessionsList from './SessionsList.jsx';
 
 class HostInfoDetail extends React.Component {
 	constructor(props) {
@@ -37,6 +38,7 @@ class HostInfoDetail extends React.Component {
 				<Link to={`/hosts/${this.state.hostId}/sessions/new`}>
 					Add session
 				</Link>
+				<SessionsList data={this.state.sessions}/>
 			</div>
 		)
 	}
