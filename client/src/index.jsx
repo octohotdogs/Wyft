@@ -4,6 +4,7 @@ import $ from 'jquery';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import GuestDashboard from './components/GuestDash.jsx';
 import HostDashboard from './components/HostDash.jsx';
+import HostDashAddHost from './components/HostDashAddHost.jsx';
 import Navigation from './components/Navigation.jsx';
 // import COMPONENT from './components/COMPONENTNAME.jsx';
 
@@ -18,7 +19,8 @@ class App extends React.Component {
       // default is Guest, so `state` starts off as a zipCode input from the Guest zip code search
       guest            : true,
       zipcode          : '',
-      availableHosts   : []
+      availableHosts   : [],
+      hosts: []
 
     }
 
@@ -65,7 +67,7 @@ class App extends React.Component {
 
   }
 
-  addHost(avail, zip, contact, gift) {
+  addHost(data) {
     // ajax POST
 
     // takes four strings
@@ -77,26 +79,34 @@ class App extends React.Component {
     // a successful post results in a notification in brower window
       // ex. "Thank you for hosting!"
 
-  //   $.ajax({
-  //     type: 'POST',
-  //     url: 'http://localhost:3000/api/hosts',
-  //     data: JSON.stringify({
-  //       'availability' : avail,
-  //       'zip'          : zip,
-  //       'contactInfo'  : contact,
-  //       'gift'         : gift
-  //     }),
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost:3000/api/hosts',
+      data: JSON.stringify({data: data}),
+      contentType: 'application/json',
+      success: function(data) {
+        console.log(data);
+      },
+      error: function(err) {
 
-  //     success: function(data) {
-
-  //     },
-
-  //     error: function(err) {
-
-  //     }
-  //   })
+      }
+    })
   }
 
+  componentDidMount() {
+    var _this = this;
+    $.ajax({
+      type: 'GET',
+      url: '/api/hosts',
+      contentType: 'application/json',
+      success: function(data){
+        _this.setState({hosts: data});
+      },
+      error: function(err){
+        console.log(err);
+      }
+    });
+  }
 
   render() {
     // default is Guest dashboard
@@ -113,9 +123,12 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" render={(props) => (
               <GuestDashboard searchZip={this.searchZipCodes}/>
-              )} />       
-            <Route exact path="/host" render={(props) => (
-              <HostDashboard accessHostDash={this.selectHostDash} />
+              )} />
+            <Route exact path="/hosts" render={ (props) => (
+              <HostDashboard data={this.state.hosts}/>
+            )} />   
+            <Route exact path="/host/new" render={(props) => (
+              <HostDashAddHost addHost={this.addHost} />
             )} />                        
           </Switch>
         </div>
