@@ -100,14 +100,14 @@ class App extends React.Component {
     $.get('/api/hosts', (data) => {
       console.log(data);
       this.setState({hosts: data})
-    })      
+    })
   }
 
   // componentDidMount() {
   //   $.get('/api/hosts', (data) => {
   //     console.log(data);
   //     this.setState({hosts: data})
-  //   })        
+  //   })
   // }
 
   render() {
@@ -118,26 +118,24 @@ class App extends React.Component {
         // includes a button to switch to 'Guest' dashboard
     return (
       <Router>
-        <div>      
+        <div>
           <Navigation getHosts={this.getHosts}/>
-          <h1>wyft</h1>
-          <h4>your friend with wifi</h4>            
           <Switch>
             <Route exact path="/" render={(props) => (
               <GuestDashboard searchZip={this.searchZipCodes}/>
               )} />
             <Route exact path="/hosts" render={ (props) => (
               <HostDashboard data={this.state.hosts}/>
-            )} />   
+            )} />
             <Route exact path="/host/new" render={(props) => (
               <HostDashAddHost addHost={this.addHost} />
-            )} />      
+            )} />
             <Route exact path="/hosts/:host_id" render={(props) => {
               let hostPosition = props.location.pathname.replace('/hosts/','');
               return (
                 <HostInfoDetail hostId={hostPosition}/>
               )
-            }}/>            
+            }}/>
           </Switch>
         </div>
       </Router>
