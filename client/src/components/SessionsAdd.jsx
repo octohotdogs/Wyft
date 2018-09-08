@@ -29,10 +29,10 @@ class SessionsAdd extends React.Component {
   		url: `/api/hosts/${this.props.hostId}/sessions`,
   		data: JSON.stringify({data: this.state}),
   		contentType: 'application/json',
-      success: function(data) {
-      	//TODO redirect the page to host profile
-        console.log(data);
-      },
+	      success: function(data) {
+	      	//TODO redirect the page to host profile
+	        console.log(data);
+	      },
       error: function(err) {
       	console.log(err);
       }  		
