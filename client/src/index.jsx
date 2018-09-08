@@ -4,6 +4,7 @@ import $ from 'jquery';
 import GuestDashboard from './components/GuestDash.jsx';
 import HostDashboard from './components/HostDash.jsx';
 // import COMPONENT from './components/COMPONENTNAME.jsx';
+// import COMPONENT from './components/COMPONENTNAME.jsx';
 
 class App extends React.Component {
   constructor(props) {

@@ -12,8 +12,10 @@ class HostResultsList extends React.Component {
 
   render() {
     // renders list of individual Host buttons
+    // each element in array is a button
       // when clicked
-        // each button renders individual host info
+        // each button passes state to HostInfoDetail
+          // which then renders individual host info
   }
 
 

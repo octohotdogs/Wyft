@@ -1,3 +1,6 @@
+// when guest clicks search
+  // HostResultsList should populate
+
 import React from 'react';
 
 class GuestDashboard extends React.Component {
