@@ -6,6 +6,7 @@ import GuestDashboard from './components/GuestDash.jsx';
 import HostDashboard from './components/HostDash.jsx';
 import HostDashAddHost from './components/HostDashAddHost.jsx';
 import HostInfoDetail from './components/HostInfoDetail.jsx';
+import SessionsAdd from './components/SessionsAdd.jsx';
 import Navigation from './components/Navigation.jsx';
 // import COMPONENT from './components/COMPONENTNAME.jsx';
 // import COMPONENT from './components/COMPONENTNAME.jsx';
@@ -131,11 +132,20 @@ class App extends React.Component {
               <HostDashAddHost addHost={this.addHost} />
             )} />
             <Route exact path="/hosts/:host_id" render={(props) => {
-              let hostPosition = props.location.pathname.replace('/hosts/','');
+              //let hostPosition = props.location.pathname.replace('/hosts/','');
+              let hostPosition = props.match.params.host_id;
               return (
                 <HostInfoDetail hostId={hostPosition}/>
               )
             }}/>
+            <Route exact path="/hosts/:host_id/sessions/new" render={(props) => {
+              //let hostPosition = props.location.pathname.replace('/hosts/','');
+              let hostPosition = props.match.params.host_id;
+              return (
+                <SessionsAdd hostId={hostPosition}/>
+              )
+            }}/>
+
           </Switch>
         </div>
       </Router>
