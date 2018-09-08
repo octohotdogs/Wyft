@@ -6,6 +6,11 @@ class Navigation extends React.Component {
 		super(props);
 		this.state = {
 		}
+		this.handleClickedHost = this.handleClickedHost.bind(this);
+	}
+
+	handleClickedHost() {
+		this.props.getHosts();
 	}
 
 	render() {
@@ -16,7 +21,7 @@ class Navigation extends React.Component {
 						<Link to="/">Guest</Link>
 					</li>
 					<li>
-						<Link to="/hosts">Hosts</Link>
+						<Link to="/hosts" onClick={this.handleClickedHost}>Hosts</Link>
 					</li>					
 					<li>
 						<Link to="/host/new">New Host</Link>
