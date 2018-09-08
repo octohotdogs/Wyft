@@ -103,8 +103,6 @@ class App extends React.Component {
       // Host MVP is a page with four inputs (availability, zip code, contact info, optional gift) and a `submit` button
         // includes a button to switch to 'Guest' dashboard
     return (<div>
-            <h1>wyft</h1>
-            <h4>your friend with wifi</h4>
             <GuestDashboard searchZip={this.searchZipCodes}/>
             <HostDashboard accessHostDash={this.selectHostDash} />
 
