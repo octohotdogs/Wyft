@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const orm = new Sequelize('wyft', 'root', '', {
+const orm = new Sequelize('wyft', 'root', 'password', {
   host:'localhost',
   dialect: 'mysql',
 
@@ -129,11 +129,20 @@ const fetchAvailableSessionDetails = function(zipCode, cb) {
   })
 }
 
-const getHostInfo = function(hostIDs) {
-  return Host.sync().then()
+const fetchAllHosts = function(cb) {
+  return Host.sync().then(function(){
+    Host.findAll().then(function(data){
+      cb(data);
+    })
+  });
 }
 
-
+const fetchSessionDetailsForHost = function(hostID, cb) {
+  Hosting_Session.findAll({where:{host_id:hostID}}).then(function(data){
+      var sessionData = data.map(e => e.dataValues);
+      cb(sessionData);
+  });
+}
 
 
 module.exports.Guest = Guest;
@@ -143,5 +152,7 @@ module.exports.insertIntoGuest = insertIntoGuest;
 module.exports.insertIntoHost = insertIntoHost;
 module.exports.insertIntoHostingSession=insertIntoHostingSession;
 module.exports.fetchAvailableSessionDetails = fetchAvailableSessionDetails;
+module.exports.fetchAllHosts = fetchAllHosts;
+module.exports.fetchSessionDetailsForHost = fetchSessionDetailsForHost;
 
 

@@ -4,17 +4,15 @@ var get = (req, res, db, id) => {
 		// find the host from db
 		res.json({id: id});		
 	} else {
-		// TODO
-		// db.fetchAvailableSessionDetails('', function(result){
-		// 	res.json(result)
-		// })		
+		db.fetchAllHosts((data) => {
+			res.json(data);
+		})	
 	}
 }
 
 var post = (req, res, db) => {
 	//console.log('body...',req.body);
-	var hostData = req.body;
-
+	var hostData = req.body.data;
 	// TODO add cb
 	// db.insertIntoHost(hostData, (err, data) => {
 	// 	var successMsg = {"message": "Thanks for hosting your wifi with us"}
