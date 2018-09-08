@@ -1,6 +1,6 @@
 const express = require('express');
 var bodyParser = require('body-parser');
-const data = require('./../data/host_addresses.json');
+const host_addressess_data = require('./../data/host_addresses.json');
 const db = require('../db/index.js');
 //const guest = require('./../data/guest.json');
 //const host = require('./../data/host.json');
@@ -35,7 +35,8 @@ app.use(express.static(__dirname + '/../client/dist'));
 // });
 
 app.post('/api/guests/search', (req, res) => {
-	hostSessions.search(req, res, db);
+	//hostSessions.search(req, res, db);
+	return res.json(host_addressess_data)
 });
 
 app.post('/api/guests', (req, res) => {
@@ -63,7 +64,7 @@ app.route('/api/hosts')
 // create new session for a host
 app.post('/api/hosts/:hostId/sessions', (req, res) => {
 	var hostId = req.params.hostId;
-	hostSessions.post(req, res, db, hostId);
+	hostSessions.post(req, res, db, hostId);	
 });
 
 // app.route('/api/host_sessions')

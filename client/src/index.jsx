@@ -42,7 +42,8 @@ class App extends React.Component {
       contentType: 'application/json',
 
       success: function(data) {
-        console.log('🌸 client/src/index.jsx');
+        //console.log('🌸 client/src/index.jsx');
+        console.log(data)
         // on success
           // returns a list of hosts with matching zip codes
       },
