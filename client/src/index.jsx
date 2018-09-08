@@ -21,13 +21,14 @@ class App extends React.Component {
       guest            : true,
       zipcode          : '',
       availableHosts   : [],
-      hosts: []
+      hosts: ''
 
     }
 
     this.searchZipCodes = this.searchZipCodes.bind(this);
     this.selectHostDash = this.selectHostDash.bind(this);
     this.addHost = this.addHost.bind(this);
+    this.getHosts = this.getHosts.bind(this);
   }
 
   searchZipCodes(zipCode) {
@@ -94,20 +95,19 @@ class App extends React.Component {
     })
   }
 
-  componentDidMount() {
-    var _this = this;
-    $.ajax({
-      type: 'GET',
-      url: '/api/hosts',
-      contentType: 'application/json',
-      success: function(data){
-        _this.setState({hosts: data});
-      },
-      error: function(err){
-        console.log(err);
-      }
-    });
+  getHosts() {
+    $.get('/api/hosts', (data) => {
+      console.log(data);
+      this.setState({hosts: data})
+    })      
   }
+
+  // componentDidMount() {
+  //   $.get('/api/hosts', (data) => {
+  //     console.log(data);
+  //     this.setState({hosts: data})
+  //   })        
+  // }
 
   render() {
     // default is Guest dashboard
@@ -118,7 +118,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>      
-          <Navigation/>
+          <Navigation getHosts={this.getHosts}/>
           <h1>wyft</h1>
           <h4>your friend with wifi</h4>            
           <Switch>
