@@ -16,7 +16,10 @@ class Navigation extends React.Component {
 						<Link to="/">Guest</Link>
 					</li>
 					<li>
-						<Link to="/host">Host</Link>
+						<Link to="/hosts">Hosts</Link>
+					</li>					
+					<li>
+						<Link to="/host/new">New Host</Link>
 					</li>
 				</ul>
 			</div>
