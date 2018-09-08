@@ -10,8 +10,8 @@ class HostDashboard extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if(this.state.data !== prevProps.data) {      
+  componentDidUpdate(prevProps, prevState) {
+    if(this.props.data !== prevProps.data) {  
       this.setState({data: this.props.data});
     }
   }
