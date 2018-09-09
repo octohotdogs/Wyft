@@ -1,33 +1,32 @@
 import React from 'react';
 import $ from 'jquery';
 import moment from 'moment';
+import {
+  DateInput,
+  TimeInput,
+  DateTimeInput,
+  DatesRangeInput
+} from 'semantic-ui-calendar-react';
 
 class SessionsAdd extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			DATE: '',
-			START_TIME: '',
-			END_TIME: '',
-			hostId: '',
-			date: new Date()
+			DATE: new Date(),
+			START_TIME: new Date(),
+			END_TIME: new Date(),
+			hostId: ''
 		}
 
-		this.onChangeInput = this.onChangeInput.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-  onChangeInput(e){
-  	var changedField = e.target.name;
-  	var changedVal = e.target.value;
-  	this.setState({[changedField]: changedVal});
-  }	
 
-  handleChange(date) {
-  	this.setState({
-  		date: date
-  	})
+  handleChange(event, {name, value}){
+    if (this.state.hasOwnProperty(name)) {
+      this.setState({ [name]: value });
+    }
   }
 
   onSubmit(){
@@ -50,30 +49,28 @@ class SessionsAdd extends React.Component {
 
 	render() {
 		return(
-			<div>		
+			<div>
 				<form>				
 	        <label>Date
-		        <input 
-		        	type="text"
-		        	name="DATE"
-		        	value={this.state.DATE}
-		        	onChange={this.onChangeInput}
-		        />
+					<DateInput
+	          name="DATE"
+	          placeholder="Date"
+	          value={this.state.DATE}
+	          iconPosition="left"
+	          onChange={this.handleChange} />	
 		      </label><br/>
 	        <label>Start time
-		        <input 
-		        	type="text"
+		        <TimeInput 
 		        	name="START_TIME"
 		        	value={this.state.START_TIME}
-		        	onChange={this.onChangeInput}
+		        	onChange={this.handleChange}
 		        />
 		      </label><br/>	
 	        <label>End time
-		        <input 
-		        	type="text"
+		        <TimeInput 
 		        	name="END_TIME"
 		        	value={this.state.END_TIME}
-		        	onChange={this.onChangeInput}
+		        	onChange={this.handleChange}
 		        />
 		      </label><br/>			      	      
 				</form>

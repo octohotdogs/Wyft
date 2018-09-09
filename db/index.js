@@ -100,9 +100,9 @@ const insertIntoHost = function(hostData, cb) {
 }
 
 const insertIntoHostingSession = function(hostingSessionData, hostId, cb) {
-  const DATE = hostingSessionData.date;
-  const START_TIME = hostingSessionData.start;
-  const END_TIME = hostingSessionData.end;
+  const DATE = hostingSessionData.DATE;
+  const START_TIME = hostingSessionData.START_TIME;
+  const END_TIME = hostingSessionData.END_TIME;
   return Hosting_Session.sync().then(function(){
     Hosting_Session
       .create({DATE:DATE, START_TIME:START_TIME, END_TIME:END_TIME,host_id:hostId})
