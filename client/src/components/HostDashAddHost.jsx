@@ -1,109 +1,114 @@
 import React from 'react';
+import { Form, Button } from 'semantic-ui-react';
 
 class HostDashAddHost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    	firstName: '',
-    	lastName: '',
-    	streetNum: '',
-    	streetName: '',
-    	zip: '',
-    	userName: '',
-    	password: '',
-    	optional: ''
-    }
+      firstName: '',
+      lastName: '',
+      streetNum: '',
+      streetName: '',
+      zip: '',
+      userName: '',
+      password: '',
+      optional: ''
+    };
 
     this.onChangeInput = this.onChangeInput.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onChangeInput(e){
-  	var changedField = e.target.name;
-  	var changedVal = e.target.value;
-  	this.setState({ [changedField]: changedVal});
+  onChangeInput(e) {
+    var changedField = e.target.name;
+    var changedVal = e.target.value;
+    this.setState({ [changedField]: changedVal });
   }
 
-  onSubmit(){
-  	this.props.addHost(this.state);
+  onSubmit() {
+    this.props.addHost(this.state);
   }
 
   render() {
     return (
       <div>
-        <h6>add new host</h6>
-        <form>
-	        <label>First Name:
-		        <input 
-		        	type="text"
-		        	name="firstName"
-		        	value={this.state.firstName}
-		        	onChange={this.onChangeInput}
-		        />
-		      </label><br/>
-	        <label>Last Name:
-		        <input 
-		        	type="text"
-		        	name="lastName"
-		        	value={this.state.lastName}
-		        	onChange={this.onChangeInput}
-		        />
-		      </label><br/>
-	        <label>Street Number:
-		        <input 
-		        	type="number"
-		        	name="streetNum"
-		        	value={this.state.streetNum}
-		        	onChange={this.onChangeInput}
-		        />
-		      </label><br/>
-	        <label>Street Name:
-		        <input 
-		        	type="text"
-		        	name="streetName"
-		        	value={this.state.streetName}
-		        	onChange={this.onChangeInput}
-		        />
-		      </label><br/>
-	        <label>Zip:
-		        <input 
-		        	type="text"
-		        	name="zip"
-		        	value={this.state.zip}
-		        	onChange={this.onChangeInput}
-		        />
-		      </label><br/>
-	        <label>userName:
-		        <input 
-		        	type="text"
-		        	name="userName"
-		        	value={this.state.userName}
-		        	onChange={this.onChangeInput}
-		        />
-		      </label>
-		      <br/>
-	        <label>password:
-		        <input 
-		        	type="password"
-		        	name="password"
-		        	value={this.state.password}
-		        	onChange={this.onChangeInput}
-		        />
-		      </label>
-		      <br/>
-	        <label>optional:
-		        <input 
-		        	type="text"
-		        	name="optional"
-		        	value={this.state.optional}
-		        	onChange={this.onChangeInput}
-		        />
-		      </label>		      
-		    </form>
-		    <button onClick={this.onSubmit} >Submit</button>
+        <h5>Add New Host</h5>
+        <Form>
+          <Form.Group widths="equal">
+            <Form.Input
+              fluid
+              label="First Name:"
+              type="text"
+              name="firstName"
+              value={this.state.firstName}
+              onChange={this.onChangeInput}
+            />
+            <Form.Input
+              fluid
+              label="Last Name:"
+              type="text"
+              name="lastName"
+              value={this.state.lastName}
+              onChange={this.onChangeInput}
+            />
+          </Form.Group>
+          <Form.Group widths="equal">
+            <Form.Input
+              fluid
+              label="Street Number"
+              type="number"
+              name="streetNum"
+              value={this.state.streetNum}
+              onChange={this.onChangeInput}
+            />
+            <Form.Input
+              fluid
+              label="Street Name"
+              type="text"
+              name="streetName"
+              value={this.state.streetName}
+              onChange={this.onChangeInput}
+            />
+            <Form.Input
+              fluid
+              label="zip"
+              type="text"
+              name="zip"
+              value={this.state.zip}
+              onChange={this.onChangeInput}
+            />
+          </Form.Group>
+          <Form.Group widths="equal">
+            <Form.Input
+              fluid
+              label="UserName"
+              type="text"
+              name="userName"
+              value={this.state.userName}
+              onChange={this.onChangeInput}
+            />
+            <Form.Input
+              fluid
+              label="Password"
+              type="password"
+              name="password"
+              value={this.state.password}
+              onChange={this.onChangeInput}
+            />
+            <Form.Input
+              fluid
+              label="Optional"
+              type="text"
+              name="optional"
+              value={this.state.optional}
+              onChange={this.onChangeInput}
+            />
+          </Form.Group>
+          <Button onClick={this.onSubmit}>Submit</Button>
+        </Form>
       </div>
     );
-  }  
+  }
 }
 
 export default HostDashAddHost;
