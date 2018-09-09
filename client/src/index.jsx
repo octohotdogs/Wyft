@@ -49,7 +49,7 @@ class App extends React.Component {
 
       success: function(data) {
         //console.log('🌸 client/src/index.jsx');
-        cb(data)
+        cb(data);
         // on success
         // returns a list of hosts with matching zip codes
       },
@@ -112,7 +112,7 @@ class App extends React.Component {
             <Navigation getHosts={this.getHosts} />
             <div className="wrapper">
               <h1 className="ui huge header">Wyft</h1>
-              <h5>Like CouchSurfing, but for WiFi.</h5>
+              <h4>Like CouchSurfing, but for WiFi.</h4>
               <Switch>
                 <Route
                   exact
