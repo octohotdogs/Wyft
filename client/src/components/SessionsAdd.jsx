@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import moment from 'moment';
 
 class SessionsAdd extends React.Component {
 	constructor(props) {
@@ -8,11 +9,13 @@ class SessionsAdd extends React.Component {
 			DATE: '',
 			START_TIME: '',
 			END_TIME: '',
-			hostId: ''
+			hostId: '',
+			date: new Date()
 		}
 
 		this.onChangeInput = this.onChangeInput.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
   onChangeInput(e){
@@ -20,6 +23,12 @@ class SessionsAdd extends React.Component {
   	var changedVal = e.target.value;
   	this.setState({[changedField]: changedVal});
   }	
+
+  handleChange(date) {
+  	this.setState({
+  		date: date
+  	})
+  }
 
   onSubmit(){
   	this.setState({hostId: this.props.hostId});
@@ -29,7 +38,7 @@ class SessionsAdd extends React.Component {
   		url: `/api/hosts/${this.props.hostId}/sessions`,
   		data: JSON.stringify({data: this.state}),
   		contentType: 'application/json',
-	      success: function(data) {
+	      success: function(data) {	      	
 	      	//TODO redirect the page to host profile
 	        console.log(data);
 	      },
@@ -41,8 +50,8 @@ class SessionsAdd extends React.Component {
 
 	render() {
 		return(
-			<div>
-				<form>
+			<div>		
+				<form>				
 	        <label>Date
 		        <input 
 		        	type="text"
