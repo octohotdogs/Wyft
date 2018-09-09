@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import moment from 'moment';
+import { Form, Button } from 'semantic-ui-react';
 import {
   DateInput,
   TimeInput,
@@ -12,9 +13,9 @@ class SessionsAdd extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			DATE: new Date(),
-			START_TIME: new Date(),
-			END_TIME: new Date(),
+			DATE: '',
+			START_TIME: '',
+			END_TIME: '',
 			hostId: ''
 		}
 
@@ -50,30 +51,30 @@ class SessionsAdd extends React.Component {
 	render() {
 		return(
 			<div>
-				<form>				
-	        <label>Date
-					<DateInput
+				<Form>							
+					<Form.Group widths="equal">
+						<DateInput
 	          name="DATE"
 	          placeholder="Date"
 	          value={this.state.DATE}
 	          iconPosition="left"
 	          onChange={this.handleChange} />	
-		      </label><br/>
-	        <label>Start time
-		        <TimeInput 
-		        	name="START_TIME"
-		        	value={this.state.START_TIME}
-		        	onChange={this.handleChange}
-		        />
-		      </label><br/>	
-	        <label>End time
-		        <TimeInput 
-		        	name="END_TIME"
-		        	value={this.state.END_TIME}
-		        	onChange={this.handleChange}
-		        />
-		      </label><br/>			      	      
-				</form>
+					</Form.Group>	   
+					<Form.Group widths="equal">
+							<TimeInput 
+			        	name="START_TIME"
+			        	placeholder="Start time"
+			        	value={this.state.START_TIME}
+			        	onChange={this.handleChange}
+			        />
+			        <TimeInput 
+			        	name="END_TIME"
+			        	placeholder="End time"
+			        	value={this.state.END_TIME}
+			        	onChange={this.handleChange}
+			        />			        
+					</Form.Group>	  	        	      	      
+				</Form>
 				<button onClick={this.onSubmit} >Submit</button>
 			</div>
 		);
