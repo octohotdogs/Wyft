@@ -2,12 +2,14 @@
   // HostResultsList should populate
 
 import React from 'react';
+import SessionsList from './SessionsList.jsx';
 
 class GuestDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      zipCode: ''
+      zipCode: '',
+      sessions: []
     }
     this.onChange = this.onChange.bind(this);
     this.search = this.search.bind(this);
@@ -20,15 +22,21 @@ class GuestDashboard extends React.Component {
   }
 
   search() {
-    this.props.searchZip(this.state.zipCode);
+    this.props.searchZip(this.state.zipCode, (data) => {
+      console.log(data);
+      this.setState({sessions: data});
+    });
   }
 
   render() {
-    return (<div>
-      <h5>enter your zip code</h5>
-      <input value={this.state.zipCode} onChange={this.onChange}></input>
-      <button onClick={this.search}>search</button>
-      </div>)
+    return (
+      <div>
+        <h5>enter your zip code</h5>
+        <input value={this.state.zipCode} onChange={this.onChange}></input>
+        <button onClick={this.search}>search</button>
+        <SessionsList data={this.state.sessions}/>
+      </div>
+    )
   }
 }
 
