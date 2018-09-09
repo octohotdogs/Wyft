@@ -27,6 +27,15 @@ class HostDashAddHost extends React.Component {
 
   onSubmit() {
     this.props.addHost(this.state);
+    this.setState({
+      firstName: '',
+      lastName: '',
+      streetNum: '',
+      streetName: '',
+      zip: '',
+      userName: '',
+      password: ''
+    });
   }
 
   render() {
@@ -104,7 +113,7 @@ class HostDashAddHost extends React.Component {
               onChange={this.onChangeInput}
             />
           </Form.Group>
-          <Button onClick={this.onSubmit}>Submit</Button>
+          <Form.Button onClick={this.onSubmit}>Submit</Form.Button>
         </Form>
       </div>
     );
