@@ -34,7 +34,8 @@ class HostDashAddHost extends React.Component {
       streetName: '',
       zip: '',
       userName: '',
-      password: ''
+      password: '',
+      optional_details: ''
     });
   }
 
@@ -45,6 +46,7 @@ class HostDashAddHost extends React.Component {
         <Form>
           <Form.Group widths="equal">
             <Form.Input
+              required
               fluid
               label="First Name:"
               type="text"
@@ -53,6 +55,7 @@ class HostDashAddHost extends React.Component {
               onChange={this.onChangeInput}
             />
             <Form.Input
+              required
               fluid
               label="Last Name:"
               type="text"
@@ -63,6 +66,7 @@ class HostDashAddHost extends React.Component {
           </Form.Group>
           <Form.Group widths="equal">
             <Form.Input
+              required
               fluid
               label="Street Number"
               type="number"
@@ -71,6 +75,7 @@ class HostDashAddHost extends React.Component {
               onChange={this.onChangeInput}
             />
             <Form.Input
+              required
               fluid
               label="Street Name"
               type="text"
@@ -79,6 +84,7 @@ class HostDashAddHost extends React.Component {
               onChange={this.onChangeInput}
             />
             <Form.Input
+              required
               fluid
               label="zip"
               type="text"
@@ -89,6 +95,7 @@ class HostDashAddHost extends React.Component {
           </Form.Group>
           <Form.Group widths="equal">
             <Form.Input
+              required
               fluid
               label="UserName"
               type="text"
@@ -97,6 +104,7 @@ class HostDashAddHost extends React.Component {
               onChange={this.onChangeInput}
             />
             <Form.Input
+              required
               fluid
               label="Password"
               type="password"
