@@ -1,5 +1,13 @@
 import React from 'react';
 import $ from 'jquery';
+import moment from 'moment';
+import { Form, Button } from 'semantic-ui-react';
+import {
+  DateInput,
+  TimeInput,
+  DateTimeInput,
+  DatesRangeInput
+} from 'semantic-ui-calendar-react';
 
 class SessionsAdd extends React.Component {
 	constructor(props) {
@@ -11,15 +19,16 @@ class SessionsAdd extends React.Component {
 			hostId: ''
 		}
 
-		this.onChangeInput = this.onChangeInput.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
-  onChangeInput(e){
-  	var changedField = e.target.name;
-  	var changedVal = e.target.value;
-  	this.setState({[changedField]: changedVal});
-  }	
+
+  handleChange(event, {name, value}){
+    if (this.state.hasOwnProperty(name)) {
+      this.setState({ [name]: value });
+    }
+  }
 
   onSubmit(){
   	this.setState({hostId: this.props.hostId});
@@ -29,10 +38,10 @@ class SessionsAdd extends React.Component {
   		url: `/api/hosts/${this.props.hostId}/sessions`,
   		data: JSON.stringify({data: this.state}),
   		contentType: 'application/json',
-      success: function(data) {
-      	//TODO redirect the page to host profile
-        console.log(data);
-      },
+	      success: function(data) {	      	
+	      	//TODO redirect the page to host profile
+	        console.log(data);
+	      },
       error: function(err) {
       	console.log(err);
       }  		
@@ -42,32 +51,30 @@ class SessionsAdd extends React.Component {
 	render() {
 		return(
 			<div>
-				<form>
-	        <label>Date
-		        <input 
-		        	type="text"
-		        	name="DATE"
-		        	value={this.state.DATE}
-		        	onChange={this.onChangeInput}
-		        />
-		      </label><br/>
-	        <label>Start time
-		        <input 
-		        	type="text"
-		        	name="START_TIME"
-		        	value={this.state.START_TIME}
-		        	onChange={this.onChangeInput}
-		        />
-		      </label><br/>	
-	        <label>End time
-		        <input 
-		        	type="text"
-		        	name="END_TIME"
-		        	value={this.state.END_TIME}
-		        	onChange={this.onChangeInput}
-		        />
-		      </label><br/>			      	      
-				</form>
+				<Form>							
+					<Form.Group widths="equal">
+						<DateInput
+	          name="DATE"
+	          placeholder="Date"
+	          value={this.state.DATE}
+	          iconPosition="left"
+	          onChange={this.handleChange} />	
+					</Form.Group>	   
+					<Form.Group widths="equal">
+							<TimeInput 
+			        	name="START_TIME"
+			        	placeholder="Start time"
+			        	value={this.state.START_TIME}
+			        	onChange={this.handleChange}
+			        />
+			        <TimeInput 
+			        	name="END_TIME"
+			        	placeholder="End time"
+			        	value={this.state.END_TIME}
+			        	onChange={this.handleChange}
+			        />			        
+					</Form.Group>	  	        	      	      
+				</Form>
 				<button onClick={this.onSubmit} >Submit</button>
 			</div>
 		);
