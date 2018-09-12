@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import $ from 'jquery';
 import moment from 'moment';
 import { Form, Button } from 'semantic-ui-react';
@@ -16,11 +17,14 @@ class SessionsAdd extends React.Component {
 			DATE: '',
 			START_TIME: '',
 			END_TIME: '',
-			hostId: ''
+			hostId: '',
+			redirect: false,
+			redirect_path: ''
 		}
 
 		this.onSubmit = this.onSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.renderRedirect = this.renderRedirect.bind(this);
 	}
 
 
@@ -32,7 +36,8 @@ class SessionsAdd extends React.Component {
 
   onSubmit(){
   	this.setState({hostId: this.props.hostId});
-  	console.log(this.state);
+  	var $this = this;  	
+
   	$.ajax({
   		type: 'POST',
   		url: `/api/hosts/${this.props.hostId}/sessions`,
@@ -40,7 +45,10 @@ class SessionsAdd extends React.Component {
   		contentType: 'application/json',
 	      success: function(data) {	      	
 	      	//TODO redirect the page to host profile
-	        console.log(data);
+	      	var path = `/hosts/${data.host_id}`;
+	      	$this.setState({redirect: true, redirect_path: path});
+	      	//browserHistory.push(path);
+	        //this.props.history.push('/')
 	      },
       error: function(err) {
       	console.log(err);
@@ -48,9 +56,17 @@ class SessionsAdd extends React.Component {
   	})
   }
 
+  renderRedirect() {
+    if (this.state.redirect) {
+    	var path = this.state.redirect_path;
+      return <Redirect to={path} />
+    }
+  }  
+
 	render() {
 		return(
 			<div>
+				{this.renderRedirect()}
 				<Form>							
 					<Form.Group widths="equal">
 						<DateInput
