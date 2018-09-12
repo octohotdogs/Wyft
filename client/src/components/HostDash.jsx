@@ -11,6 +11,12 @@ class HostDashboard extends React.Component {
     }
   }
 
+  componentDidMount(){
+    $.get('/api/hosts', data => {
+      this.setState({ data: data });
+    });    
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if(this.props.data !== prevProps.data) {  
       this.setState({data: this.props.data});
