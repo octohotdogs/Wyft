@@ -135,13 +135,17 @@ class App extends React.Component {
                   exact
                   path="/hosts/:host_id"
                   render={props => {
-                    let hostPosition = props.location.pathname.replace(
-                      '/hosts/',
-                      ''
-                    );
+                    let hostPosition = props.match.params.host_id;
                     return <HostInfoDetail hostId={hostPosition} />;
                   }}
                 />
+                <Route exact path="/hosts/:host_id/sessions/new" render={(props) => {
+                  //let hostPosition = props.location.pathname.replace('/hosts/','');
+                  let hostPosition = props.match.params.host_id;
+                  return (
+                    <SessionsAdd hostId={hostPosition}/>
+                  )
+                }}/>                
               </Switch>
             </div>
           </div>
