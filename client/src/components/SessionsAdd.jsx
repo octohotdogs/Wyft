@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 import $ from 'jquery';
 import moment from 'moment';
 import { Form, Button } from 'semantic-ui-react';
