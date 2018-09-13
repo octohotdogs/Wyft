@@ -4,3 +4,11 @@
 label {
   text-align: left;
 }
+h4 {
+  font-size: 1.5rem;
+  padding: 0 15px 0;
+}
+.ui.button {
+  position: relative;
+  top: 3px;
+}
