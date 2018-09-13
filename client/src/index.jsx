@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import GuestDashboard from './components/GuestDash.jsx';
 import HostDashboard from './components/HostDash.jsx';
@@ -69,7 +68,7 @@ class App extends React.Component {
     // button to select the Host Dashboard
   }
 
-  addHost(data) {
+  addHost(data, callback) {
     // ajax POST
 
     // takes four strings
@@ -88,6 +87,7 @@ class App extends React.Component {
       contentType: 'application/json',
       success: function(data) {
         console.log(data);
+        callback();
       },
       error: function(err) {}
     });
@@ -100,6 +100,8 @@ class App extends React.Component {
     });
   }
 
+
+
   render() {
     // default is Guest dashboard
     // Guest MVP is a page with an input with a `search` button
@@ -108,7 +110,7 @@ class App extends React.Component {
     // includes a button to switch to 'Guest' dashboard
     return (
       <Container>
-        <Router>
+        <Router >
           <div>
             <Navigation getHosts={this.getHosts} />
             <div className="wrapper">

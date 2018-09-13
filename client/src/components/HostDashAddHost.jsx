@@ -1,5 +1,6 @@
 import React from 'react';
-import { Form } from 'semantic-ui-react';
+import { Redirect } from 'react-router-dom';
+import { Form, Button } from 'semantic-ui-react';
 
 class HostDashAddHost extends React.Component {
   constructor(props) {
@@ -12,11 +13,21 @@ class HostDashAddHost extends React.Component {
       zip: '',
       userName: '',
       password: '',
-      optional: ''
+      optional: '',
+      redirect: false,
+      redirect_path: '/hosts'
     };
 
     this.onChangeInput = this.onChangeInput.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.renderRedirect = this.renderRedirect.bind(this);
+  }
+
+  renderRedirect() {
+    if (this.state.redirect) {
+      var path = this.state.redirect_path;
+      return <Redirect to={path} />;
+    }
   }
 
   onChangeInput(e) {
@@ -26,7 +37,9 @@ class HostDashAddHost extends React.Component {
   }
 
   onSubmit() {
-    this.props.addHost(this.state);
+    this.props.addHost(this.state, () => {
+      this.setState({ redirect: true });
+    });
     this.setState({
       firstName: '',
       lastName: '',
@@ -42,6 +55,7 @@ class HostDashAddHost extends React.Component {
   render() {
     return (
       <div>
+        {this.renderRedirect()}
         <h5>Add New Host</h5>
         <Form>
           <Form.Group widths="equal">
