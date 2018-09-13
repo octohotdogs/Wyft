@@ -11,24 +11,20 @@ import {
 } from 'semantic-ui-calendar-react';
 
 class SessionsAdd extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			DATE: '',
-			START_TIME: '',
-			END_TIME: '',
-			hostId: '',
-			redirect: false,
-			redirect_path: ''
-		}
-
-		this.onSubmit = this.onSubmit.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-		this.renderRedirect = this.renderRedirect.bind(this);
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      DATE: '',
+      START_TIME: '',
+      END_TIME: '',
+      hostId: '',
+      redirect: false,
+      redirect_path: ''
+    };
 
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.renderRedirect = this.renderRedirect.bind(this);
   }
 
   handleChange(event, { name, value }) {
@@ -37,22 +33,22 @@ class SessionsAdd extends React.Component {
     }
   }
 
-  onSubmit(){
-  	this.setState({hostId: this.props.hostId});
-  	var $this = this;
+  onSubmit() {
+    this.setState({ hostId: this.props.hostId });
+    var $this = this;
 
-  	$.ajax({
-  		type: 'POST',
-  		url: `/api/hosts/${this.props.hostId}/sessions`,
-  		data: JSON.stringify({data: this.state}),
-  		contentType: 'application/json',
-	      success: function(data) {
-	      	//TODO redirect the page to host profile
-	      	var path = `/hosts/${data.host_id}`;
-	      	$this.setState({redirect: true, redirect_path: path});
-	      	//browserHistory.push(path);
-	        //this.props.history.push('/')
-	      },
+    $.ajax({
+      type: 'POST',
+      url: `/api/hosts/${this.props.hostId}/sessions`,
+      data: JSON.stringify({ data: this.state }),
+      contentType: 'application/json',
+      success: function(data) {
+        //TODO redirect the page to host profile
+        var path = `/hosts/${data.host_id}`;
+        $this.setState({ redirect: true, redirect_path: path });
+        //browserHistory.push(path);
+        //this.props.history.push('/')
+      },
       error: function(err) {
         console.log(err);
       }
@@ -61,43 +57,44 @@ class SessionsAdd extends React.Component {
 
   renderRedirect() {
     if (this.state.redirect) {
-    	var path = this.state.redirect_path;
-      return <Redirect to={path} />
+      var path = this.state.redirect_path;
+      return <Redirect to={path} />;
     }
   }
 
-	render() {
-		return(
-			<div>
-				{this.renderRedirect()}
-				<Form>
-					<Form.Group widths="equal">
-						<DateInput
-	          name="DATE"
-	          placeholder="Date"
-	          value={this.state.DATE}
-	          iconPosition="left"
-	          onChange={this.handleChange} />
-					</Form.Group>
-					<Form.Group widths="equal">
-							<TimeInput
-			        	name="START_TIME"
-			        	placeholder="Start time"
-			        	value={this.state.START_TIME}
-			        	onChange={this.handleChange}
-			        />
-			        <TimeInput
-			        	name="END_TIME"
-			        	placeholder="End time"
-			        	value={this.state.END_TIME}
-			        	onChange={this.handleChange}
-			        />
-					</Form.Group>
-				</Form>
-				<Button onClick={this.onSubmit} >Submit</Button>
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div>
+        {this.renderRedirect()}
+        <Form>
+          <Form.Group widths="equal">
+            <DateInput
+              name="DATE"
+              placeholder="Date"
+              value={this.state.DATE}
+              iconPosition="left"
+              onChange={this.handleChange}
+            />
+          </Form.Group>
+          <Form.Group widths="equal">
+            <TimeInput
+              name="START_TIME"
+              placeholder="Start time"
+              value={this.state.START_TIME}
+              onChange={this.handleChange}
+            />
+            <TimeInput
+              name="END_TIME"
+              placeholder="End time"
+              value={this.state.END_TIME}
+              onChange={this.handleChange}
+            />
+          </Form.Group>
+        </Form>
+        <Button onClick={this.onSubmit}>Submit</Button>
+      </div>
+    );
+  }
 }
 
 export default SessionsAdd;
