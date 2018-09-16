@@ -3,6 +3,7 @@
 
 import React from 'react';
 import SessionsList from './SessionsList.jsx';
+import GoogleMapKit from './GoogleMapKit.jsx';
 
 class GuestDashboard extends React.Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class GuestDashboard extends React.Component {
         <input value={this.state.zipCode} onChange={this.onChange}></input>
         <button onClick={this.search}>search</button>
         <SessionsList data={this.state.sessions}/>
+        <GoogleMapKit/>
       </div>
     )
   }
