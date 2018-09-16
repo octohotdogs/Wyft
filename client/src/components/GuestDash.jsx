@@ -17,6 +17,8 @@ class GuestDashboard extends React.Component {
       sessions: [],
       hostLatLngs: []
     };
+
+    this.getUserLocation = this.getUserLocation.bind(this);
     this.onChange = this.onChange.bind(this);
     this.search = this.search.bind(this);
   }
@@ -24,6 +26,17 @@ class GuestDashboard extends React.Component {
   onChange(e) {
     this.setState({
       zipCode: e.target.value
+    });
+  }
+
+  getUserLocation() {
+    let that = this;
+
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      console.log(pos);
+      that.setState({
+        userLocation: pos
+      });  
     });
   }
 
