@@ -26,9 +26,9 @@ class HostDashAddHost extends React.Component {
   renderRedirect() {
     if (this.state.redirect) {
       var path = this.state.redirect_path;
-      return <Redirect to={path} />
+      return <Redirect to={path} />;
     }
-  }  
+  }
 
   onChangeInput(e) {
     var changedField = e.target.name;
@@ -37,8 +37,8 @@ class HostDashAddHost extends React.Component {
   }
 
   onSubmit() {
-    this.props.addHost(this.state, ()=>{
-      this.setState({redirect: true})
+    this.props.addHost(this.state, () => {
+      this.setState({ redirect: true });
     });
     this.setState({
       firstName: '',

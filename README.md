@@ -90,6 +90,15 @@ mysql -u root
 create database wyft;
 ```
 
+## Config Env variables
+1. Create a .env file in the root directory of your project.  Add environment-specific variables on new lines in the form of NAME=VALUE.  For example: 
+
+```javascript
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=s1mpl3
+```
+
 ### Roadmap
 
 View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
