@@ -2,6 +2,7 @@ const express = require('express');
 var bodyParser = require('body-parser');
 const host_addressess_data = require('./../data/host_addresses.json');
 const db = require('../db/index.js');
+
 //const guest = require('./../data/guest.json');
 //const host = require('./../data/host.json');
 
@@ -46,7 +47,7 @@ app.post('/api/guests', (req, res) => {
 
 // host crud
 app.route('/api/hosts')
-	.get((req, res) => {		
+	.get((req, res) => {
 		hosts.get(req, res, db, null)
 	})
 	.post((req, res) => {
@@ -64,7 +65,7 @@ app.route('/api/hosts')
 // create new session for a host
 app.post('/api/hosts/:hostId/sessions', (req, res) => {
 	var hostId = req.params.hostId;
-	hostSessions.post(req, res, db, hostId);	
+	hostSessions.post(req, res, db, hostId);
 });
 
 // get session for give host
@@ -74,7 +75,7 @@ app.get('/api/hosts/:hostId/sessions', (req, res) => {
 });
 
 // app.route('/api/host_sessions')
-// 	.get((req, res) => {		
+// 	.get((req, res) => {
 // 		hostSessions.get(req, res, db, null)
 // 	})
 	// .post((req, res) => {

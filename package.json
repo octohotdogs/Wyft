@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "dev": "concurrently --kill-others \"npm run react-dev\" \"npm run server-dev\""
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,8 @@
   },
   "dependencies": {
     "body-parser": "^1.17.2",
+    "concurrently": "^4.0.1",
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "jquery": "^3.1.1",
     "moment": "^2.22.2",
