@@ -3,6 +3,7 @@
 
 import React from 'react';
 import SessionsList from './SessionsList.jsx';
+import GoogleMapKit from './GoogleMapKit.jsx';
 import { Form, Input, Button } from 'semantic-ui-react';
 
 class GuestDashboard extends React.Component {
@@ -33,6 +34,10 @@ class GuestDashboard extends React.Component {
     return (
       <div>
         <h5>enter your zip code</h5>
+        <input value={this.state.zipCode} onChange={this.onChange}></input>
+        <button onClick={this.search}>search</button>
+        <SessionsList data={this.state.sessions}/>
+        <GoogleMapKit/>
         <Form>
           <Form.Field inline>
             <Input value={this.state.zipCode} onChange={this.onChange} />
