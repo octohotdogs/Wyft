@@ -74,6 +74,11 @@ app.get('/api/hosts/:hostId/sessions', (req, res) => {
 	hostSessions.getAll(req, res, db, hostId);
 });
 
+// get hosts address for the map
+app.get('/api/hosts/addresses', (req, res) => {
+	hostSessions.getHostAddresses(req, res);
+})
+
 // app.route('/api/host_sessions')
 // 	.get((req, res) => {
 // 		hostSessions.get(req, res, db, null)
