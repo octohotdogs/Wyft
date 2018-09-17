@@ -1,0 +1,46 @@
+[ {
+  "id": 2,
+  "street_address": "0 Portage Center",
+  "lat": 38.9485485,
+  "lng": 22.8400018
+}, {
+  "id": 3,
+  "street_address": "707 Springview Court",
+  "lat": 14.5016958,
+  "lng": 121.042743
+}, {
+  "id": 4,
+  "street_address": "1 Algoma Crossing",
+  "lat": 59.2074685,
+  "lng": 9.6105211
+}, {
+  "id": 5,
+  "street_address": "34084 Oakridge Drive",
+  "lat": 23.213961,
+  "lng": 115.203506
+}, {
+  "id": 6,
+  "street_address": "5 Harbort Hill",
+  "lat": 19.5269646,
+  "lng": -72.2437813
+}, {
+  "id": 7,
+  "street_address": "155 Thackeray Center",
+  "lat": 13.8536285,
+  "lng": -89.4535357
+}, {
+  "id": 8,
+  "street_address": "9173 Del Mar Court",
+  "lat": 6.5959532,
+  "lng": 3.5033042
+}, {
+  "id": 9,
+  "street_address": "3170 Nancy Junction",
+  "lat": 42.075123,
+  "lng": 21.0523541
+}, {
+  "id": 10,
+  "street_address": "1 Ruskin Avenue",
+  "lat": 46.5884132,
+  "lng": 14.2652932
+}]
