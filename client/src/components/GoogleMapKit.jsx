@@ -6,36 +6,32 @@ class GoogleMapKit extends React.Component {
 	constructor(props) {
 		super(props);
     this.state = {
-      guestLatLng: {lat: 17.75, lng: 121.7333298},
-      hostLatLngs: [{
-            "id": 2,
-            "street_address": "0 Portage Center",
-            "lat": 38.9485485,
-            "lng": 22.8400018
-          }, {
-            "id": 3,
-            "street_address": "707 Springview Court",
-            "lat": 14.5016958,
-            "lng": 121.042743
-          }, {
-            "id": 4,
-            "street_address": "1 Algoma Crossing",
-            "lat": 59.2074685,
-            "lng": 9.6105211
-          }],
+      guestLatLng: '',
+      hostLatLngs: [],
       map: '',
       clickedHost: ''
-    }
+    }    
     this.setupMap = this.setupMap.bind(this);
     this.setupHostMarkers = this.setupHostMarkers.bind(this);
 	}
 
-  componentDidMount() {
-    // console.log(sectionsData)
+  // componentDidMount() {
+  //   // console.log(sectionsData)
+  //   var _this = this;
+  //   this.setupMap(function(){
+  //     _this.setupHostMarkers();
+  //   });
+  // }
+
+  componentDidUpdate(prevProps){    
     var _this = this;
-    this.setupMap(function(){
-      _this.setupHostMarkers();
-    });
+    if(this.props.guestLatLng !== prevProps.guestLatLng) {
+      this.setState({guestLatLng: this.props.guestLatLng}, function(){
+        _this.setupMap(function(){
+          console.log('yey');
+        });
+      });
+    }
   }
 
   setupMap(cb) {
