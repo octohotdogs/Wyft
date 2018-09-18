@@ -5,7 +5,7 @@ import React from 'react';
 import $ from 'jquery';
 import SessionsList from './SessionsList.jsx';
 import GoogleMapKit from './GoogleMapKit.jsx';
-import { Form, Input, Button } from 'semantic-ui-react';
+import { Form, Input, Button, Grid, Divider } from 'semantic-ui-react';
 import { getGeocode } from './../../../helpers/google_map/google-map-search.js'
 
 class GuestDashboard extends React.Component {
@@ -67,17 +67,21 @@ class GuestDashboard extends React.Component {
     return (
       <div>
         <h5>Enter address</h5>
-        <input value={this.state.zipCode} onChange={this.onChange}></input>
-        <button onClick={this.search}>search</button>
-        <SessionsList data={this.state.sessions}/>
-        <GoogleMapKit guestLatLng={this.state.guestLatLng} hostLatLngs={this.state.hostLatLngs}/>
         <Form>
           <Form.Field inline>
             <Input value={this.state.zipCode} onChange={this.onChange} />
             <Button onClick={this.search}>search</Button>
           </Form.Field>
         </Form>
-        <SessionsList data={this.state.sessions} />
+        <Divider />
+        <Grid>
+          <Grid.Column width={12}>
+            <GoogleMapKit guestLatLng={this.state.guestLatLng} hostLatLngs={this.state.hostLatLngs}/>
+          </Grid.Column>          
+          <Grid.Column width={4}>
+            <SessionsList data={this.state.hostLatLngs} />
+          </Grid.Column>                    
+        </Grid>                 
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Label, Menu, Table } from 'semantic-ui-react';
+import { Icon, Label, Menu, Table, Card, Button } from 'semantic-ui-react';
 
 class SessionsListItem extends React.Component {
   constructor(props) {
@@ -17,7 +17,22 @@ class SessionsListItem extends React.Component {
 
   render() {
     return (
-      <div></div>
+      <Card>
+        <Card.Content>
+          <Card.Header>{this.props.data['street_address']}</Card.Header>
+          <Card.Meta>2 Miles</Card.Meta>
+        </Card.Content>
+        <Card.Content extra>
+          <div className='ui two buttons'>
+            <Button basic color='green'>
+              Approve
+            </Button>
+            <Button basic color='red'>
+              Decline
+            </Button>
+          </div>
+        </Card.Content>
+      </Card>
     );
   }
 }

@@ -32,7 +32,7 @@ class GoogleMapKit extends React.Component {
         });
       });
     }
-    // update of sessions
+    // update of host addresses from db
     if(this.props.hostLatLngs !== prevProps.hostLatLngs) {
       this.setState({hostLatLngs: this.props.hostLatLngs}, function(){
         //console.log(this.props.hostLatLngs)
