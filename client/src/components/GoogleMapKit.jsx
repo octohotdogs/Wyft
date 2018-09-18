@@ -32,6 +32,13 @@ class GoogleMapKit extends React.Component {
         });
       });
     }
+    // update of sessions
+    if(this.props.hostLatLngs !== prevProps.hostLatLngs) {
+      this.setState({hostLatLngs: this.props.hostLatLngs}, function(){
+        //console.log(this.props.hostLatLngs)
+        _this.setupHostMarkers();
+      })
+    }
   }
 
   setupMap(cb) {
@@ -47,7 +54,7 @@ class GoogleMapKit extends React.Component {
     var map = this.state.map;    
     for(var i = 0; i < hostLatLngs.length; i++) {
       var latLng = hostLatLngs[i];    
-      setMapMarker(map, latLng, 'host', (hostMarker) => {
+      setMapMarker(map, latLng, 'Host', (hostMarker) => {
         console.log(hostMarker['street_address']);
       });
     }

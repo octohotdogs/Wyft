@@ -1,4 +1,5 @@
 const sectionsMockData = require('../../data/sections.json');
+//const googleApi = require('../../helpers/google_map/google-map-search.js');
 
 var post = (req, res, db, hostId) => {
 	//console.log('body...',req.body);
@@ -24,19 +25,15 @@ var getAll = (req, res, db, hostId) => {
 }
 
 var search = (req, res, db) => {
-	var data = req.body;
-	var zipCode = data['zipCode'];
-	db.fetchAvailableSessionDetails(zipCode, (data) => {
-		res.json(data);
-	});
-}
-
-var getHostAddresses = (req, res) => {
-	// mock data
+	// var data = req.body;
+	// var zipCode = data['zipCode'];
+	// db.fetchAvailableSessionDetails(zipCode, (data) => {
+	// 	res.json(data);
+	// });
 	res.json(sectionsMockData);
 }
+
 
 module.exports.post = post;
 module.exports.search = search;
 module.exports.getAll = getAll;
-module.exports.getHostAddresses = getHostAddresses;

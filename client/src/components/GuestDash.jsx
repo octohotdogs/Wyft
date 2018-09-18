@@ -2,6 +2,7 @@
 // HostResultsList should populate
 
 import React from 'react';
+import $ from 'jquery';
 import SessionsList from './SessionsList.jsx';
 import GoogleMapKit from './GoogleMapKit.jsx';
 import { Form, Input, Button } from 'semantic-ui-react';
@@ -13,7 +14,8 @@ class GuestDashboard extends React.Component {
     this.state = {
       zipCode: '', // enter address, go to google to get loclog
       guestLatLng: '',
-      sessions: []
+      sessions: [],
+      hostLatLngs: []
     };
     this.onChange = this.onChange.bind(this);
     this.search = this.search.bind(this);
@@ -36,8 +38,23 @@ class GuestDashboard extends React.Component {
       if(err) {
         console.log(err);
       } else {      
-        var guestLatLng = data.json.results[0].geometry.location;        
+        var guestLatLng = data.json.results[0].geometry.location;
+        // TODO
+        // use guestLatLng to find matches session from our database        
         _this.setState({guestLatLng: guestLatLng});
+        // get addresses from db
+        $.ajax({
+          type: 'POST',
+          url: '/api/guests/search',
+          data: JSON.stringify({ guestLatLng: guestLatLng }),   
+          contentType: 'application/json',
+          success: function(data){
+            _this.setState({hostLatLngs: data});
+          },
+          error: function(err){
+            console.log(err);
+          }      
+        })
       }
     })
     // this.props.searchZip(this.state.zipCode, data => {
@@ -53,7 +70,7 @@ class GuestDashboard extends React.Component {
         <input value={this.state.zipCode} onChange={this.onChange}></input>
         <button onClick={this.search}>search</button>
         <SessionsList data={this.state.sessions}/>
-        <GoogleMapKit guestLatLng={this.state.guestLatLng}/>
+        <GoogleMapKit guestLatLng={this.state.guestLatLng} hostLatLngs={this.state.hostLatLngs}/>
         <Form>
           <Form.Field inline>
             <Input value={this.state.zipCode} onChange={this.onChange} />

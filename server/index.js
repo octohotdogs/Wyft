@@ -36,8 +36,8 @@ app.use(express.static(__dirname + '/../client/dist'));
 // });
 
 app.post('/api/guests/search', (req, res) => {
+	//console.log(req.body.guestLatLng)
 	hostSessions.search(req, res, db);
-	//return res.json(host_addressess_data)
 });
 
 app.post('/api/guests', (req, res) => {
@@ -73,11 +73,6 @@ app.get('/api/hosts/:hostId/sessions', (req, res) => {
 	var hostId = req.params.hostId;
 	hostSessions.getAll(req, res, db, hostId);
 });
-
-// get hosts address for the map
-app.get('/api/hosts/addresses', (req, res) => {
-	hostSessions.getHostAddresses(req, res);
-})
 
 // app.route('/api/host_sessions')
 // 	.get((req, res) => {

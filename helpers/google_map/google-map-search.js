@@ -12,4 +12,5 @@ var getGeocode = function(address, cb) {
 	});
 }
 
-export {getGeocode};
+//export {getGeocode};
+module.exports.getGeocode = getGeocode;
