@@ -25,6 +25,9 @@ class Navigation extends React.Component {
         <Menu.Item as={Link} to="/host/new">
           New Host
         </Menu.Item>
+        <Menu.Item as={Link} to="/login">
+          Login
+        </Menu.Item>
       </Menu>
     );
   }
