@@ -36,8 +36,8 @@ app.use(express.static(__dirname + '/../client/dist'));
 // });
 
 app.post('/api/guests/search', (req, res) => {
+	//console.log(req.body.guestLatLng)
 	hostSessions.search(req, res, db);
-	//return res.json(host_addressess_data)
 });
 
 app.post('/api/guests', (req, res) => {

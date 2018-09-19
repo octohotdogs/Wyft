@@ -1,26 +1,50 @@
 import React from 'react';
 import {getGoogleMaps, setMapMarker} from './../../../helpers/google_map/google-map-client.js'
 
+
 class GoogleMapKit extends React.Component {
 	constructor(props) {
 		super(props);
     this.state = {
-      guestLatLng: {lat: -25.363, lng: 131.044},
+      guestLatLng: '',
       hostLatLngs: [],
-      map: ''
-    }
+      map: '',
+      clickedHost: ''
+    }    
     this.setupMap = this.setupMap.bind(this);
     this.setupHostMarkers = this.setupHostMarkers.bind(this);
 	}
 
-  componentDidMount() {
-    this.setupMap();
+  // componentDidMount() {
+  //   // console.log(sectionsData)
+  //   var _this = this;
+  //   this.setupMap(function(){
+  //     _this.setupHostMarkers();
+  //   });
+  // }
+
+  componentDidUpdate(prevProps){    
+    var _this = this;
+    if(this.props.guestLatLng !== prevProps.guestLatLng) {
+      this.setState({guestLatLng: this.props.guestLatLng}, function(){
+        _this.setupMap(function(){
+          console.log('yey');
+        });
+      });
+    }
+    // update of host addresses from db
+    if(this.props.hostLatLngs !== prevProps.hostLatLngs) {
+      this.setState({hostLatLngs: this.props.hostLatLngs}, function(){
+        //console.log(this.props.hostLatLngs)
+        _this.setupHostMarkers();
+      })
+    }
   }
 
-  setupMap() {
+  setupMap(cb) {
     var _this = this;
     getGoogleMaps('map', this.state.guestLatLng, function(map){
-      _this.setState({map: map});
+      _this.setState({map: map}, cb);
       setMapMarker(map, _this.state.guestLatLng, 'Guest');
     });
   }
@@ -29,8 +53,10 @@ class GoogleMapKit extends React.Component {
     var hostLatLngs = this.state.hostLatLngs;
     var map = this.state.map;    
     for(var i = 0; i < hostLatLngs.length; i++) {
-      var latLng = hostLatLngs[i];
-      setMapMarker(map, hostLatLngs, 'host');
+      var latLng = hostLatLngs[i];    
+      setMapMarker(map, latLng, 'Host', (hostMarker) => {
+        console.log(hostMarker['street_address']);
+      });
     }
   }
 

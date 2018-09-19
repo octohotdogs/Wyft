@@ -1,5 +1,6 @@
 import React from 'react';
 import SessionsListItem from './SessionsListItem.jsx';
+import { Card } from 'semantic-ui-react'
 
 class SessionsList extends React.Component {
   constructor(props) {
@@ -17,11 +18,11 @@ class SessionsList extends React.Component {
 
   render() {
     return (
-      <div>
+      <Card.Group>
         {this.state.data.map(item => (
           <SessionsListItem key={item.id} data={item} />
         ))}
-      </div>
+      </Card.Group>
     );
   }
 }
