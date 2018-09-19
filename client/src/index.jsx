@@ -7,6 +7,7 @@ import HostDashboard from './components/HostDash.jsx';
 import HostDashAddHost from './components/HostDashAddHost.jsx';
 import HostInfoDetail from './components/HostInfoDetail.jsx';
 import SessionsAdd from './components/SessionsAdd.jsx';
+import Login from './components/Login.jsx';
 import Navigation from './components/Navigation.jsx';
 // import COMPONENT from './components/COMPONENTNAME.jsx';
 // import COMPONENT from './components/COMPONENTNAME.jsx';
@@ -148,7 +149,12 @@ class App extends React.Component {
                   return (
                     <SessionsAdd hostId={hostPosition}/>
                   )
-                }}/>                
+                }}/>
+                <Route
+                  exact
+                  path="/login"
+                  render={props => <Login />}
+                />
               </Switch>
             </div>
           </div>
