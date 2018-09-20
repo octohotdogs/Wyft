@@ -66,7 +66,10 @@ const importHost = function(host_data) {
 	Host.create({
 		FIRST_NAME: host_data['first_name'],
 		LAST_NAME: host_data['last_name'],
-		ADDRESS: host_data['address'],
+		ADDRESS: host_data['street_address'],
+    STREET_NUMBER: host_data['street_number'],
+    STREET_NAME: host_data['street_name'],
+    ZIP_CODE: host_data['zip_code'],
 		LAT: host_data['lat'],
 		LNG: host_data['lng'],
 	}).then((host) => {
