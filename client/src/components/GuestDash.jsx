@@ -18,7 +18,6 @@ class GuestDashboard extends React.Component {
       hostLatLngs: []
     };
 
-    this.getUserLocation = this.getUserLocation.bind(this);
     this.onChange = this.onChange.bind(this);
     this.search = this.search.bind(this);
   }
@@ -48,22 +47,17 @@ class GuestDashboard extends React.Component {
   }
 
   search() {
-    //  TODO
-    // search need to do 2 things
     // 1. get geo data from google -- improve this with autocomplete search
     // 2. go to our database to find matches
-    var _this = this;
+    var that = this;
 
     getGeocode(this.state.zipCode, function(err, data) {
       if(err) {
         console.log(err);
       } else {      
         var guestLatLng = data.json.results[0].geometry.location;
-        // TODO
-        // use guestLatLng to find matches session from our database        
-        _this.setState({guestLatLng: guestLatLng});
-        // get addresses from db
-        _this.findHosts(_this, guestLatLng);
+        that.setState({guestLatLng: guestLatLng});
+        that.findHosts(that, guestLatLng);
       }
     });
     // this.props.searchZip(this.state.zipCode, data => {
