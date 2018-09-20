@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 // import { Form, Input, Button } from 'semantic-ui-react';
 // implement using Semantic UI later!
 
@@ -12,6 +13,22 @@ class Login extends React.Component {
 
   doLogin() {
     console.log(this.state); // FIXME
+    jQuery.ajax({
+      url: 'http://localhost:3000/login',
+      method: 'POST',
+      data: JSON.stringify({username: this.state.username, password: this.state.password}),
+      contentType: 'application/json',
+      success: function(loggedIn) {
+        if (loggedIn) {
+          window.location = '/';
+        } else {
+          window.location = '/login';
+        }
+      },
+      error: function(err) {
+        console.log(err);
+      },
+    })
   }
 
   updateField(e) {

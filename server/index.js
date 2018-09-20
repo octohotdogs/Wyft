@@ -11,6 +11,7 @@ const app = express();
 const hosts = require('./controllers/hosts.js');
 const guests = require('./controllers/guests.js');
 const hostSessions = require('./controllers/host_sessions.js');
+const logins = require('./controllers/logins.js');
 
 // recommendation, explanation is fuzzy, ask NFD >
 
@@ -91,7 +92,13 @@ app.get('/api/hosts/:hostId/sessions', (req, res) => {
 // 	.put( hostSessions.put )
 // 	.delete( hostSessions.delete )
 
+// logging a user in
+app.post('/login', (req, res) => {
+	logins.login(req, res, db);
+});
+
 // catchall route for redirecting from the server side
+// **keep this at the bottom!**
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'), function(err) {
     if (err) {
