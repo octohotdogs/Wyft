@@ -35,8 +35,15 @@ class GuestDashboard extends React.Component {
     navigator.geolocation.getCurrentPosition(function(pos) {
       console.log(pos);
       that.setState({
-        userLocation: pos
-      });  
+        guestLatLng: {
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude
+        }
+      });
+
+      that.findHosts(that, that.state.guestLatLng);
+    }, function(err) {
+      console.log('Location not found.');
     });
   }
 
@@ -72,8 +79,6 @@ class GuestDashboard extends React.Component {
       data: JSON.stringify({ guestLatLng: guestLatLng }),
       contentType: 'application/json',
       success: function(data) {
-        console.log('SUCCESS');
-        console.log(data);
         scope.setState({hostLatLngs: data});
       },
       error: function(err) {
