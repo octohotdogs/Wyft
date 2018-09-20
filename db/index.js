@@ -20,7 +20,7 @@ orm.query("set FOREIGN_KEY_CHECKS=0");
 
 const Guest = orm.define('Guest',{
   FIRST_NAME: Sequelize.STRING,
-  LAST_NAME: Sequelize.STRING,
+  LAST_NAME: Sequelize.STRING,  
   STREET_NUMBER: Sequelize.INTEGER,
   STREET_NAME: Sequelize.STRING,
   ZIP_CODE: Sequelize.INTEGER,
@@ -35,6 +35,9 @@ const Host = orm.define('Host', {
   STREET_NUMBER: Sequelize.INTEGER,
   STREET_NAME: Sequelize.STRING,
   ZIP_CODE: Sequelize.INTEGER,
+  ADDRESS: Sequelize.STRING,
+  LAT: Sequelize.FLOAT,
+  LNG: Sequelize.FLOAT,    
   USERNAME:Sequelize.STRING,
   PASSWORD: Sequelize.STRING,
   OPTIONAL_DETAILS: Sequelize.STRING
