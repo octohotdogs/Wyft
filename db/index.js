@@ -135,6 +135,8 @@ const fetchAvailableSessionDetails = function(zipCode, cb) {
   })
 }
 
+
+
 const fetchAllHosts = function(cb) {
   return Host.sync().then(function(){
     Host.findAll().then(function(data){

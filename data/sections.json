@@ -5,7 +5,7 @@
   "street_number": "8754",
   "street_name": "Washington Blvd",
   "zip_code": "90660",
-  "address": "8754 Washington Blvd, Pico Rivera, CA 90660",
+  "street_address": "8754 Washington Blvd, Pico Rivera, CA 90660",
   "lat": 33.9844895,
   "lng": -118.1001753,
   "sections": [
