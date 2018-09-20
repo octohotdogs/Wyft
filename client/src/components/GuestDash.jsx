@@ -17,6 +17,8 @@ class GuestDashboard extends React.Component {
       sessions: [],
       hostLatLngs: []
     };
+
+    this.getUserLocation = this.getUserLocation.bind(this);
     this.onChange = this.onChange.bind(this);
     this.search = this.search.bind(this);
   }
@@ -27,40 +29,57 @@ class GuestDashboard extends React.Component {
     });
   }
 
+  getUserLocation() {
+    let that = this;
+
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      console.log(pos);
+      that.setState({
+        guestLatLng: {
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude
+        }
+      });
+
+      that.findHosts(that, that.state.guestLatLng);
+    }, function(err) {
+      console.log('Location not found.');
+    });
+  }
+
   search() {
-    //  TODO
-    // search need to do 2 things
     // 1. get geo data from google -- improve this with autocomplete search
     // 2. go to our database to find matches
-    var _this = this;
+    var that = this;
 
     getGeocode(this.state.zipCode, function(err, data) {
       if(err) {
         console.log(err);
       } else {      
         var guestLatLng = data.json.results[0].geometry.location;
-        // TODO
-        // use guestLatLng to find matches session from our database        
-        _this.setState({guestLatLng: guestLatLng});
-        // get addresses from db
-        $.ajax({
-          type: 'POST',
-          url: '/api/guests/search',
-          data: JSON.stringify({ guestLatLng: guestLatLng }),   
-          contentType: 'application/json',
-          success: function(data){
-            _this.setState({hostLatLngs: data});
-          },
-          error: function(err){
-            console.log(err);
-          }      
-        })
+        that.setState({guestLatLng: guestLatLng});
+        that.findHosts(that, guestLatLng);
       }
-    })
+    });
     // this.props.searchZip(this.state.zipCode, data => {
     //   console.log(data);
     //   this.setState({ sessions: data });
     // });
+  }
+
+  findHosts(scope, guestLatLng) {
+    $.ajax({
+      type: 'POST',
+      url: '/api/guests/search',
+      data: JSON.stringify({ guestLatLng: guestLatLng }),
+      contentType: 'application/json',
+      success: function(data) {
+        scope.setState({hostLatLngs: data});
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
   }
 
   render() {
@@ -69,7 +88,8 @@ class GuestDashboard extends React.Component {
         <h5>Enter address</h5>
         <Form>
           <Form.Field inline>
-            <Input value={this.state.zipCode} onChange={this.onChange} />
+            <Input value={this.state.zipCode} onChange={this.onChange} /><br />
+            <Button onClick={this.getUserLocation}>find near me</Button>
             <Button onClick={this.search}>search</Button>
           </Form.Field>
         </Form>
