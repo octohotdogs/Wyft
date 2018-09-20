@@ -149,7 +149,11 @@ const fetchSessionDetailsForHost = function(hostID, cb) {
 
 const fetchOneHostByUsername = function(username, cb) {
   Host.find({ where: { username: username } }).then(function(data) {
-    cb(null, data.dataValues);
+    if (data === null) {
+      cb(null, {});
+    } else {
+      cb(null, data.dataValues);
+    }
   }).catch(function(err) {
     cb(err, null);
   });
