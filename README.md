@@ -17,6 +17,7 @@ Do you like using Lyft, the app that's basically your friend with a car? Wouldn'
     1. [Tasks](#tasks)
 1. [Team](#team)
 1. [Contributing](#contributing)
+1. [Import Seed file](#import-seed-file)
 
 ## Usage
 
@@ -98,6 +99,10 @@ DB_HOST=localhost
 DB_USER=root
 DB_PASS=s1mpl3
 ```
+
+### Import Seed file
+1. run `mysql -u root -p < seed/truncate_table.sql` to delete all existing tables
+2. run `node seed/seed.js` to import seed data
 
 ### Roadmap
 
