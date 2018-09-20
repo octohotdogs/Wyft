@@ -18,6 +18,7 @@ class GuestDashboard extends React.Component {
       hostLatLngs: []
     };
 
+    this.getUserLocation = this.getUserLocation.bind(this);
     this.onChange = this.onChange.bind(this);
     this.search = this.search.bind(this);
   }
