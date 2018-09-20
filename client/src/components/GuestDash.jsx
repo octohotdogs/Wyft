@@ -56,24 +56,30 @@ class GuestDashboard extends React.Component {
         // use guestLatLng to find matches session from our database        
         _this.setState({guestLatLng: guestLatLng});
         // get addresses from db
-        $.ajax({
-          type: 'POST',
-          url: '/api/guests/search',
-          data: JSON.stringify({ guestLatLng: guestLatLng }),   
-          contentType: 'application/json',
-          success: function(data){
-            _this.setState({hostLatLngs: data});
-          },
-          error: function(err){
-            console.log(err);
-          }      
-        })
+        _this.findHosts(_this, guestLatLng);
       }
-    })
+    });
     // this.props.searchZip(this.state.zipCode, data => {
     //   console.log(data);
     //   this.setState({ sessions: data });
     // });
+  }
+
+  findHosts(scope, guestLatLng) {
+    $.ajax({
+      type: 'POST',
+      url: '/api/guests/search',
+      data: JSON.stringify({ guestLatLng: guestLatLng }),
+      contentType: 'application/json',
+      success: function(data) {
+        console.log('SUCCESS');
+        console.log(data);
+        scope.setState({hostLatLngs: data});
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
   }
 
   render() {
@@ -82,7 +88,8 @@ class GuestDashboard extends React.Component {
         <h5>Enter address</h5>
         <Form>
           <Form.Field inline>
-            <Input value={this.state.zipCode} onChange={this.onChange} />
+            <Input value={this.state.zipCode} onChange={this.onChange} /><br />
+            <Button onClick={this.getUserLocation}>find near me</Button>
             <Button onClick={this.search}>search</Button>
           </Form.Field>
         </Form>
