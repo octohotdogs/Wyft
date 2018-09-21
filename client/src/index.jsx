@@ -96,7 +96,6 @@ class App extends React.Component {
 
   getHosts() {
     $.get('/api/hosts', data => {
-      console.log(data);
       this.setState({ hosts: data });
     });
   }
