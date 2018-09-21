@@ -2,6 +2,7 @@ const express = require('express');
 var bodyParser = require('body-parser');
 const host_addressess_data = require('./../data/host_addresses.json');
 const db = require('../db/index.js');
+const path = require('path');
 
 //const guest = require('./../data/guest.json');
 //const host = require('./../data/host.json');
@@ -10,6 +11,7 @@ const app = express();
 const hosts = require('./controllers/hosts.js');
 const guests = require('./controllers/guests.js');
 const hostSessions = require('./controllers/host_sessions.js');
+const logins = require('./controllers/logins.js');
 
 // recommendation, explanation is fuzzy, ask NFD >
 
@@ -94,5 +96,20 @@ app.get('/api/hosting_sessions', (req, res) => {
 // 	})
 // 	.put( hostSessions.put )
 // 	.delete( hostSessions.delete )
+
+// logging a user in
+app.post('/login', (req, res) => {
+	logins.login(req, res, db);
+});
+
+// catchall route for redirecting from the server side
+// **keep this at the bottom!**
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '/../client/dist/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))

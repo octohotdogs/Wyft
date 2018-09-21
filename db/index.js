@@ -187,6 +187,17 @@ const fetchSessionDetailsForHost = function(hostID, cb) {
   });
 }
 
+const fetchOneHostByUsername = function(username, cb) {
+  Host.find({ where: { username: username } }).then(function(data) {
+    if (data === null) {
+      cb(null, {});
+    } else {
+      cb(null, data.dataValues);
+    }
+  }).catch(function(err) {
+    cb(err, null);
+  });
+};
 
 
 module.exports.Guest = Guest;
@@ -200,5 +211,4 @@ module.exports.fetchAllHosts = fetchAllHosts;
 module.exports.fetchSessionDetailsForHost = fetchSessionDetailsForHost;
 //module.exports.getSessionWithAddress = getSessionWithAddress;
 module.exports.searchHostingSessions = searchHostingSessions;
-
-
+module.exports.fetchOneHostByUsername = fetchOneHostByUsername;
