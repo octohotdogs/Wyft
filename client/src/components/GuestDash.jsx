@@ -5,7 +5,7 @@ import React from 'react';
 import $ from 'jquery';
 import SearchResultList from './search_result/SearchResultList.jsx';
 import GoogleMapKit from './GoogleMapKit.jsx';
-import { Form, Input, Button, Grid, Divider } from 'semantic-ui-react';
+import { Form, Input, Button, Grid, Divider, Segment } from 'semantic-ui-react';
 import { getGeocode } from './../../../helpers/google_map/google-map-search.js'
 
 class GuestDashboard extends React.Component {
@@ -101,7 +101,7 @@ class GuestDashboard extends React.Component {
           <Grid.Column width={4}>
             <SearchResultList data={this.state.hostLatLngs} />
           </Grid.Column>                    
-        </Grid>                 
+        </Grid>               
       </div>
     );
   }
