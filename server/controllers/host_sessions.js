@@ -33,7 +33,14 @@ var search = (req, res, db) => {
 	res.json(sectionsMockData);
 }
 
+var dummySearch = (req, res, db) => {
+	db.searchHostingSessions((data)=>{
+		res.json(data);
+	});	
+}
+
 
 module.exports.post = post;
 module.exports.search = search;
 module.exports.getAll = getAll;
+module.exports.dummySearch = dummySearch;
