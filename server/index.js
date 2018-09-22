@@ -39,7 +39,8 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/api/guests/search', (req, res) => {
 	//console.log(req.body.guestLatLng)
-	hostSessions.search(req, res, db);
+	//hostSessions.search(req, res, db);
+	hostSessions.dummySearch(req, res, db);
 });
 
 app.post('/api/guests', (req, res) => {
@@ -75,6 +76,10 @@ app.get('/api/hosts/:hostId/sessions', (req, res) => {
 	var hostId = req.params.hostId;
 	hostSessions.getAll(req, res, db, hostId);
 });
+
+app.get('/api/hosting_sessions', (req, res) => {
+	hostSessions.dummySearch(req, res, db);
+})
 
 // app.route('/api/host_sessions')
 // 	.get((req, res) => {

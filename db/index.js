@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const _ = require('underscore');
 require('dotenv').config();
 
 const orm = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
@@ -20,7 +21,7 @@ orm.query("set FOREIGN_KEY_CHECKS=0");
 
 const Guest = orm.define('Guest',{
   FIRST_NAME: Sequelize.STRING,
-  LAST_NAME: Sequelize.STRING,
+  LAST_NAME: Sequelize.STRING,  
   STREET_NUMBER: Sequelize.INTEGER,
   STREET_NAME: Sequelize.STRING,
   ZIP_CODE: Sequelize.INTEGER,
@@ -35,6 +36,9 @@ const Host = orm.define('Host', {
   STREET_NUMBER: Sequelize.INTEGER,
   STREET_NAME: Sequelize.STRING,
   ZIP_CODE: Sequelize.INTEGER,
+  ADDRESS: Sequelize.STRING,
+  LAT: Sequelize.FLOAT,
+  LNG: Sequelize.FLOAT,    
   USERNAME:Sequelize.STRING,
   PASSWORD: Sequelize.STRING,
   OPTIONAL_DETAILS: Sequelize.STRING
@@ -131,6 +135,42 @@ const fetchAvailableSessionDetails = function(zipCode, cb) {
      });
   })
 }
+//9/23/2018
+const searchHostingSessions = function(cb) {
+  orm.query("SELECT a.* FROM hosts a inner join (select host_id from hosting_sessions group by host_id) b on a.id = b.host_id" , { type: orm.QueryTypes.SELECT})
+  .then((hosts) => { 
+    hosts.map((x) => {
+      x['lat'] = x.LAT;
+      x['lng'] = x.LNG;
+      x['street_address'] = x.ADDRESS;
+    });
+    var promises = hosts.map((host) => {
+      return orm.query("select * from hosting_sessions where host_id = :host_id", 
+        { replacements: { host_id: host.id }, type: orm.QueryTypes.SELECT });      
+    });
+
+    Promise.all(promises).then((hosting_sessions) => {
+
+      var result = _.groupBy(hosting_sessions, (x) => {
+        return x.host_id;
+      });
+      var result = result.undefined;
+      for(var i = 0; i < result.length; i++){
+        var sessions = result[i];
+        var host_id = sessions[0].host_id;    
+        var _host = _.find(hosts, (h) => {
+          return h.id ===  host_id;
+        });
+        _host['sections'] = sessions;
+      }
+      return hosts;      
+    }).then((data) => {
+      cb(data);
+    })  
+  })
+  .catch((err) => console.log(err));
+}
+
 
 const fetchAllHosts = function(cb) {
   return Host.sync().then(function(){
@@ -159,6 +199,7 @@ const fetchOneHostByUsername = function(username, cb) {
   });
 };
 
+
 module.exports.Guest = Guest;
 module.exports.Host = Host;
 module.exports.Hosting_Session = Hosting_Session;
@@ -168,6 +209,6 @@ module.exports.insertIntoHostingSession=insertIntoHostingSession;
 module.exports.fetchAvailableSessionDetails = fetchAvailableSessionDetails;
 module.exports.fetchAllHosts = fetchAllHosts;
 module.exports.fetchSessionDetailsForHost = fetchSessionDetailsForHost;
+//module.exports.getSessionWithAddress = getSessionWithAddress;
+module.exports.searchHostingSessions = searchHostingSessions;
 module.exports.fetchOneHostByUsername = fetchOneHostByUsername;
-
-
