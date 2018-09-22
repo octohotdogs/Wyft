@@ -29,8 +29,8 @@ class ModalHostingSessions extends React.Component {
         	<Modal.Header>Profile Picture</Modal.Header>
         	<Modal.Content image scrolling>
         		<Modal.Description>
-        			<p>{this.state.host['street_address']}</p>
-        			<p>Total availble sessions {this.state.sections.length}</p>          			
+							<p>{Math.round(this.state.host['distanceFromGuest'] * 10) / 10} miles away</p>
+        			<p>Total available sessions: {this.state.sections.length}</p>
         			<Table compact='very'>
 						    <Table.Header>
 						      <Table.Row>
