@@ -40,7 +40,7 @@ class SessionsAdd extends React.Component {
     $.ajax({
       type: 'POST',
       url: `/api/hosts/${this.props.hostId}/sessions`,
-      data: JSON.stringify({ data: this.state }),
+      data: JSON.stringify({ DATE: this.state.DATE, START_TIME: this.state.START_TIME, END_TIME: this.state.END_TIME, hostId: this.state.hostId }),
       contentType: 'application/json',
       success: function(data) {
         //TODO redirect the page to host profile
