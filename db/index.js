@@ -153,17 +153,21 @@ const searchHostingSessions = function(cb) {
 
       var result = _.groupBy(hosting_sessions, (x) => {
         return x.host_id;
-      });
+      });      
       var result = result.undefined;
-      for(var i = 0; i < result.length; i++){
-        var sessions = result[i];
-        var host_id = sessions[0].host_id;    
-        var _host = _.find(hosts, (h) => {
-          return h.id ===  host_id;
-        });
-        _host['sections'] = sessions;
-      }
-      return hosts;      
+      if(result) {
+        for(var i = 0; i < result.length; i++){
+          var sessions = result[i];
+          var host_id = sessions[0].host_id;    
+          var _host = _.find(hosts, (h) => {
+            return h.id ===  host_id;
+          });
+          _host['sections'] = sessions;
+        }
+        return hosts; 
+      } else {
+        return [];
+      }         
     }).then((data) => {
       cb(data);
     })  
