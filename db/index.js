@@ -45,10 +45,13 @@ const Host = orm.define('Host', {
 });
 
 const Hosting_Session = orm.define('Hosting_Session',{
-
   DATE: Sequelize.STRING,
   START_TIME: Sequelize.STRING,
   END_TIME: Sequelize.STRING,
+}, {
+  validate: {
+    
+  }
 })
 
 orm.query("set FOREIGN_KEY_CHECKS=1");
@@ -137,7 +140,7 @@ const fetchAvailableSessionDetails = function(zipCode, cb) {
 }
 //9/23/2018
 const searchHostingSessions = function(cb) {
-  orm.query("SELECT a.* FROM hosts a inner join (select host_id from hosting_sessions group by host_id) b on a.id = b.host_id" , { type: orm.QueryTypes.SELECT})
+  orm.query("SELECT a.* FROM Hosts a inner join (select host_id from Hosting_Sessions group by host_id) b on a.id = b.host_id" , { type: orm.QueryTypes.SELECT})
   .then((hosts) => { 
     hosts.map((x) => {
       x['lat'] = x.LAT;
@@ -145,7 +148,7 @@ const searchHostingSessions = function(cb) {
       x['street_address'] = x.ADDRESS;
     });
     var promises = hosts.map((host) => {
-      return orm.query("select * from hosting_sessions where host_id = :host_id", 
+      return orm.query("select * from Hosting_Sessions where host_id = :host_id", 
         { replacements: { host_id: host.id }, type: orm.QueryTypes.SELECT });      
     });
 
@@ -153,17 +156,21 @@ const searchHostingSessions = function(cb) {
 
       var result = _.groupBy(hosting_sessions, (x) => {
         return x.host_id;
-      });
+      });      
       var result = result.undefined;
-      for(var i = 0; i < result.length; i++){
-        var sessions = result[i];
-        var host_id = sessions[0].host_id;    
-        var _host = _.find(hosts, (h) => {
-          return h.id ===  host_id;
-        });
-        _host['sections'] = sessions;
-      }
-      return hosts;      
+      if(result) {
+        for(var i = 0; i < result.length; i++){
+          var sessions = result[i];
+          var host_id = sessions[0].host_id;    
+          var _host = _.find(hosts, (h) => {
+            return h.id ===  host_id;
+          });
+          _host['sections'] = sessions;
+        }
+        return hosts; 
+      } else {
+        return [];
+      }         
     }).then((data) => {
       cb(data);
     })  

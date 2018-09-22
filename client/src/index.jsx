@@ -9,8 +9,6 @@ import HostInfoDetail from './components/HostInfoDetail.jsx';
 import SessionsAdd from './components/SessionsAdd.jsx';
 import Login from './components/Login.jsx';
 import Navigation from './components/Navigation.jsx';
-// import COMPONENT from './components/COMPONENTNAME.jsx';
-// import COMPONENT from './components/COMPONENTNAME.jsx';
 import { Container, Segment } from 'semantic-ui-react';
 
 class App extends React.Component {
