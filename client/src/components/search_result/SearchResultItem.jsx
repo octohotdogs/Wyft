@@ -1,11 +1,11 @@
 import React from 'react';
-import { Icon, Label, Menu, Table, Card, Button } from 'semantic-ui-react';
+import { Icon, Label, Menu, Table, Card, Button, Header } from 'semantic-ui-react';
 
 class SearchResultItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: ''
+      data: ''      
     };
   }
 
@@ -26,14 +26,9 @@ class SearchResultItem extends React.Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <div className='ui two buttons'>
-            <Button basic color='green'>
-              Approve
-            </Button>
-            <Button basic color='red'>
-              Decline
-            </Button>
-          </div>
+          <Button basic color='green'>
+            Learn more
+          </Button>
         </Card.Content>
       </Card>
     );

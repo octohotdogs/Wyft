@@ -6,7 +6,7 @@ var getGoogleMaps = (elementId, LatLng, cb) => {
 	cb(map);
 }
 
-var setMapMarker = (map, LatLng, title, cb) => {
+var setMapMarker = (map, LatLng, title) => {
   var guest_icon = 'https://maps.google.com/mapfiles/kml/shapes/library_maps.png';
   var wifi_icon = 'https://maps.google.com/mapfiles/kml/pal3/icon23.png';
   var icons = {
@@ -24,11 +24,13 @@ var setMapMarker = (map, LatLng, title, cb) => {
     street_address: LatLng['street_address']
   });
 
-  marker.addListener('click', () => {
-    if(cb !== undefined) {
-      cb(marker);
-    }    
-  });
+  // marker.addListener('click', () => {
+  //   if(cb !== undefined) {
+  //     cb(marker);
+  //   }    
+  // });
+
+  return marker;
 }
 
 export { getGoogleMaps,  setMapMarker};

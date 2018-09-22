@@ -1,7 +1,6 @@
 import React from 'react';
 import {getGoogleMaps, setMapMarker} from './../../../helpers/google_map/google-map-client.js'
 
-
 class GoogleMapKit extends React.Component {
 	constructor(props) {
 		super(props);
@@ -50,15 +49,22 @@ class GoogleMapKit extends React.Component {
   }
 
   setupHostMarkers() {
+    var _this = this;
     var hostLatLngs = this.state.hostLatLngs;
     var map = this.state.map;    
     for(var i = 0; i < hostLatLngs.length; i++) {
       var latLng = hostLatLngs[i];    
-      setMapMarker(map, latLng, 'Host', (hostMarker) => {
-        console.log(hostMarker['street_address']);
-      });
+      //console.log(latLng.street_address)
+      var marker = setMapMarker(map, latLng, latLng.street_address);      
+      // TODO: understand the eventhanlder
+      marker.addListener('click', (function(marker, i) {
+        return function(){
+          _this.props.handleHostClick(hostLatLngs[i]);
+        }
+      })(marker, i));
     }
   }
+
 
   render() {    
     return (
