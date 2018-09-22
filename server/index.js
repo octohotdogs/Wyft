@@ -1,12 +1,9 @@
 const express = require('express');
 var bodyParser = require('body-parser');
-<<<<<<< HEAD
 var moment = require('moment');
 const { body, check, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
-=======
 const session = require('express-session');
->>>>>>> master
 const host_addressess_data = require('./../data/host_addresses.json');
 const db = require('../db/index.js');
 const path = require('path');
@@ -82,7 +79,7 @@ app.route('/api/hosts')
 // 	.delete( hosts.delete )
 
 // create new session for a host
-<<<<<<< HEAD
+
 app.post('/api/hosts/:hostId/sessions', 
 		[
 			body('DATE')
@@ -109,17 +106,9 @@ app.post('/api/hosts/:hostId/sessions',
 // 		hostSessions.post(req, res, db, hostId);
 // });
 
-// get session for given host
-app.get('/api/hosts/:hostId/sessions', (req, res) => {
-=======
-app.post('/api/hosts/:hostId/sessions', auth.checkSessionExists, auth.checkSessionId, (req, res) => {
-	var hostId = req.params.hostId;
-	hostSessions.post(req, res, db, hostId);
-});
 
 // get session for given host
 app.get('/api/hosts/:hostId/sessions', auth.checkSessionExists, auth.checkSessionId, (req, res) => {
->>>>>>> master
 	var hostId = req.params.hostId;
 	hostSessions.getAll(req, res, db, hostId);
 });
