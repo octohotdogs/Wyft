@@ -1,8 +1,10 @@
 const express = require('express');
 var bodyParser = require('body-parser');
+const session = require('express-session');
 const host_addressess_data = require('./../data/host_addresses.json');
 const db = require('../db/index.js');
 const path = require('path');
+const auth = require('./authenticators.js');
 
 //const guest = require('./../data/guest.json');
 //const host = require('./../data/host.json');
@@ -18,6 +20,12 @@ const logins = require('./controllers/logins.js');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client/dist'));
+app.use(session({
+  secret: 'YOUR_SECRET_HERE', // change this to a dotenv variable later
+  resave: true,
+  saveUninitialized: true
+}));
+
 //app.get('/', (req, res) => res.send('Hello world FFF'));
 
 // app.get('/api/hosts', (req, res) => {
@@ -49,6 +57,8 @@ app.post('/api/guests', (req, res) => {
 
 
 // host crud
+// note: should this be authenticated?
+// maybe, but it's less important right now
 app.route('/api/hosts')
 	.get((req, res) => {
 		hosts.get(req, res, db, null)
@@ -66,13 +76,13 @@ app.route('/api/hosts')
 // 	.delete( hosts.delete )
 
 // create new session for a host
-app.post('/api/hosts/:hostId/sessions', (req, res) => {
+app.post('/api/hosts/:hostId/sessions', auth.checkSessionExists, auth.checkSessionId, (req, res) => {
 	var hostId = req.params.hostId;
 	hostSessions.post(req, res, db, hostId);
 });
 
-// get session for give host
-app.get('/api/hosts/:hostId/sessions', (req, res) => {
+// get session for given host
+app.get('/api/hosts/:hostId/sessions', auth.checkSessionExists, auth.checkSessionId, (req, res) => {
 	var hostId = req.params.hostId;
 	hostSessions.getAll(req, res, db, hostId);
 });
