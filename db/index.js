@@ -2,8 +2,8 @@ const Sequelize = require('sequelize');
 const _ = require('underscore');
 require('dotenv').config();
 
-const orm = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-// const orm = new Sequelize('wyft', 'wyft', 'mysql', {
+//const orm = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+ const orm = new Sequelize('wyft', 'wyft', 'password', {
   host:'localhost',
   dialect: 'mysql',
 
