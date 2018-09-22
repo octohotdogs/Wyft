@@ -85,10 +85,6 @@ class GuestDashboard extends React.Component {
         that.findHosts(that, guestLatLng);
       }
     });
-    // this.props.searchZip(this.state.zipCode, data => {
-    //   console.log(data);
-    //   this.setState({ sessions: data });
-    // });
   }
 
   findHosts(scope, guestLatLng) {
@@ -99,11 +95,19 @@ class GuestDashboard extends React.Component {
       contentType: 'application/json',
       success: function(data) {
         scope.setState({hostLatLngs: data});
+        scope.guestHostDistance();
       },
       error: function(err) {
         console.log(err);
       }
     });
+  }
+
+  guestHostDistance() {
+    if (this.state.guestLatLng && this.state.hostLatLngs.length) {
+      // do the calculation
+      // return the distance
+    }
   }
 
   render() {
