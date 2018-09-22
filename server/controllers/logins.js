@@ -8,7 +8,11 @@ var login = function(req, res, db) {
       return;
     }
     if (data.PASSWORD === password) {
-      res.send(true);
+      req.session.regenerate(function() {
+        req.session.userid = data.id;
+        console.log('Session created. id: ' + req.session.userid);
+        res.send(true);
+      });
     } else {
       res.send(false);
     }
