@@ -28,6 +28,7 @@ class GuestDashboard extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleHostClick = this.handleHostClick.bind(this);
     this.handleSessionRequestClick = this.handleSessionRequestClick.bind(this);
+    this.guestHostDistance = this.guestHostDistance.bind(this);
   }
 
   onChange(e) {
@@ -94,8 +95,8 @@ class GuestDashboard extends React.Component {
       data: JSON.stringify({ guestLatLng: guestLatLng }),
       contentType: 'application/json',
       success: function(data) {
+        scope.guestHostDistance(data);
         scope.setState({hostLatLngs: data});
-        scope.guestHostDistance();
       },
       error: function(err) {
         console.log(err);
@@ -103,10 +104,34 @@ class GuestDashboard extends React.Component {
     });
   }
 
-  guestHostDistance() {
-    if (this.state.guestLatLng && this.state.hostLatLngs.length) {
-      // do the calculation
-      // return the distance
+  guestHostDistance(data) {
+    let that = this;
+
+    if (this.state.guestLatLng && data.length) {
+      console.log('let\'s do the thing');
+      console.log(data);
+
+      const R = 6371 // Radius of earth in km
+      const kmPerMile = 0.62137119;
+
+      data.forEach(function(host) {
+        let dLat = deg2rad(host.LAT - that.state.guestLatLng.lat);
+        let dLng = deg2rad(host.LNG - that.state.guestLatLng.lng);
+
+        let a = Math.pow(Math.sin(dLat / 2), 2) + 
+                Math.cos(deg2rad(that.state.guestLatLng.lat)) * Math.cos(deg2rad(host.LAT)) *
+                Math.pow(Math.sin(dLng / 2), 2)
+                ;
+
+        let c = 2 * Math.atan(Math.sqrt(a), Math.sqrt(1 - a));
+        let distance = (R * c) * kmPerMile;
+
+        host.distanceFromGuest = distance;
+      });
+
+      function deg2rad(deg) {
+        return deg * (Math.PI / 180);
+      }
     }
   }
 
