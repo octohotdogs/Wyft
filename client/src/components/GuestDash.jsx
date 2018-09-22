@@ -3,10 +3,11 @@
 
 import React from 'react';
 import $ from 'jquery';
-import SearchResultList from './search_result/SearchResultList.jsx';
 import GoogleMapKit from './GoogleMapKit.jsx';
 import { Form, Input, Button, Grid, Divider, Segment } from 'semantic-ui-react';
 import { getGeocode } from './../../../helpers/google_map/google-map-search.js'
+import SearchResultList from './search_result/SearchResultList.jsx';
+import ModalHostingSessions from './search_result/ModalHostingSessions.jsx';
 
 class GuestDashboard extends React.Component {
   constructor(props) {
@@ -15,18 +16,41 @@ class GuestDashboard extends React.Component {
       zipCode: '', // enter address, go to google to get loclog
       guestLatLng: '',
       sessions: [],
-      hostLatLngs: []
+      hostLatLngs: [],
+      selectedHost: '',
+      modalOpen: false
     };
 
     this.getUserLocation = this.getUserLocation.bind(this);
     this.onChange = this.onChange.bind(this);
     this.search = this.search.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleHostClick = this.handleHostClick.bind(this);
+    this.handleSessionRequestClick = this.handleSessionRequestClick.bind(this);
   }
 
   onChange(e) {
     this.setState({
       zipCode: e.target.value
     });
+  }
+
+  handleOpen(){
+    this.setState({ modalOpen: true });
+  }
+
+  handleClose(){
+    this.setState({ modalOpen: false });
+  }  
+
+  handleHostClick(host){
+    this.setState({selectedHost: host, modalOpen: true});
+  }
+
+  handleSessionRequestClick(session){
+    // TODO add endpoint to tell the server
+    console.log(session)
   }
 
   getUserLocation() {
@@ -93,15 +117,23 @@ class GuestDashboard extends React.Component {
             <Button onClick={this.search}>search</Button>
           </Form.Field>
         </Form>
+        <Button onClick={this.handleOpen}>Open</Button>
         <Divider />
         <Grid>
-          <Grid.Column width={12}>
-            <GoogleMapKit guestLatLng={this.state.guestLatLng} hostLatLngs={this.state.hostLatLngs}/>
-          </Grid.Column>          
-          <Grid.Column width={4}>
-            <SearchResultList data={this.state.hostLatLngs} />
-          </Grid.Column>                    
-        </Grid>               
+          <Grid.Column width={16}>
+            <GoogleMapKit 
+              guestLatLng={this.state.guestLatLng} 
+              hostLatLngs={this.state.hostLatLngs}
+              handleHostClick={this.handleHostClick}              
+            />
+          </Grid.Column>                                       
+        </Grid>
+        <ModalHostingSessions 
+          modalOpen={this.state.modalOpen} 
+          handleClose={this.handleClose}
+          selectedHost={this.state.selectedHost} 
+          handleSessionRequestClick={this.handleSessionRequestClick}
+        />   
       </div>
     );
   }
