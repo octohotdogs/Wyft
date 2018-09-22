@@ -50,7 +50,7 @@ class SessionsAdd extends React.Component {
         //this.props.history.push('/')
       },
       error: function(err) {
-        console.log(err);
+        console.log('error',err.responseJSON.errors);
       }
     });
   }

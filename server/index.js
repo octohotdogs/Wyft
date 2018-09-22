@@ -70,19 +70,20 @@ app.route('/api/hosts')
 
 // create new session for a host
 app.post('/api/hosts/:hostId/sessions', 
-		[body('DATE')
-			.exists().withMessage("Date is required")
-			.custom(value => {
+		[
+			body('DATE')
+				.exists().withMessage("Date is required")
+				.custom(value => {
 					console.log(moment(value, 'DD-MM-YYYY',true).isValid())
 					if(!moment(value, 'DD-MM-YYYY',true).isValid()){
 						return Promise.reject('Missng input');
 					} else {
 						return Promise.resolve();
 					}
-				})], (req, res) => {
+				})
+			], (req, res) => {
 		const errors = validationResult(req);
 		if(!errors.isEmpty()) {
-			console.log(errors.array())
 	    return res.status(422).json({ errors: errors.array() });
 		}
 		var hostId = req.params.hostId;
