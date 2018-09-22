@@ -15,6 +15,8 @@ class HostInfoDetail extends React.Component {
 		super(props)
 		this.state = {
 			hostId: '',
+			error: false,
+			error_msg: '',
 			sessions: []
 		}
 	}
@@ -23,22 +25,32 @@ class HostInfoDetail extends React.Component {
 		var hostId = this.props.hostId;
 		//console.log('did mount?')
 		this.setState({hostId: hostId});
-    $.get(`/api/hosts/${hostId}/sessions`, (data) => {      
-      this.setState({sessions: data})
+    $.get(`/api/hosts/${hostId}/sessions`, (data) => {   
+    	if (!data.error) {
+    		this.setState({sessions: data, error: false})
+    	} else {
+    		this.setState({error_msg: data.error.msg, error: true})
+    	}
       console.log(data);
-    }) 
+    })
 	}
 
 	render(){
+		let page;
+		if(this.state.error) {
+			page = 	<p>{this.state.error_msg}</p>;			
+		} else {
+			page = <SessionsList data={this.state.sessions}/>;
+		}
 		return(
 			// TODO 
 			// Create a sessionListItem component
 			// Use .map to render all the Host sessions
-			<div>
+			<div>								
 				<Link to={`/hosts/${this.state.hostId}/sessions/new`}>
 					Add session
 				</Link>
-				<SessionsList data={this.state.sessions}/>
+				{page}
 			</div>
 		)
 	}

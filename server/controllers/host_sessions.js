@@ -3,7 +3,8 @@ const sectionsMockData = require('../../data/sections.json');
 
 var post = (req, res, db, hostId) => {
 	//console.log('body...',req.body);
-	var hostingSessionData = req.body.data;
+	//var hostingSessionData = req.body.data;
+	var hostingSessionData = {DATE: req.body.DATE, START_TIME: req.body.START_TIME, END_TIME: req.body.END_TIME}
 	//var hostId = req.body.hostId;
 
 	// TODO add cb
