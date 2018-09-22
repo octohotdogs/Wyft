@@ -138,9 +138,10 @@ const fetchAvailableSessionDetails = function(zipCode, cb) {
      });
   })
 }
+
 //9/23/2018
 const searchHostingSessions = function(cb) {
-  orm.query("SELECT a.* FROM Hosts a inner join (select host_id from Hosting_Sessions group by host_id) b on a.id = b.host_id" , { type: orm.QueryTypes.SELECT})
+  orm.query("SELECT a.* FROM Hosts a inner join (select host_id from Hosting_Sessions where STR_TO_DATE(date, '%m/%d/%Y') >= CURDATE() group by host_id) b on a.id = b.host_id" , { type: orm.QueryTypes.SELECT})
   .then((hosts) => { 
     hosts.map((x) => {
       x['lat'] = x.LAT;
@@ -148,7 +149,7 @@ const searchHostingSessions = function(cb) {
       x['street_address'] = x.ADDRESS;
     });
     var promises = hosts.map((host) => {
-      return orm.query("select * from Hosting_Sessions where host_id = :host_id", 
+      return orm.query("select * from Hosting_Sessions where host_id = :host_id and STR_TO_DATE(date, '%m/%d/%Y') >= CURDATE()", 
         { replacements: { host_id: host.id }, type: orm.QueryTypes.SELECT });      
     });
 
