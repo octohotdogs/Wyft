@@ -30,3 +30,6 @@ bower_components/
 
 # env variables
 .env
+
+#key
+decidogs.pem
