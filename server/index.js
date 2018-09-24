@@ -8,6 +8,7 @@ const host_addressess_data = require('./../data/host_addresses.json');
 const db = require('../db/index.js');
 const path = require('path');
 const auth = require('./authenticators.js');
+const normalizePort = require('normalize-port');
 
 //const guest = require('./../data/guest.json');
 //const host = require('./../data/host.json');
@@ -80,7 +81,7 @@ app.route('/api/hosts')
 
 // create new session for a host
 
-app.post('/api/hosts/:hostId/sessions', 
+app.post('/api/hosts/:hostId/sessions',
 		[
 			body('DATE')
 				.exists().withMessage("Date is required")
@@ -148,4 +149,5 @@ app.get('/*', function(req, res) {
   })
 })
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+const port = normalizePort(process.env.PORT || '3000');
+app.listen(port, () => console.log('Example app listening on port ', port))
