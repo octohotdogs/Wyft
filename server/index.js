@@ -150,4 +150,5 @@ app.get('/*', function(req, res) {
 })
 
 const port = normalizePort(process.env.PORT || '3000');
+console.log("PORT:::::", process.env.PORT, " ", port);
 app.listen(port, () => console.log('Example app listening on port ', port))

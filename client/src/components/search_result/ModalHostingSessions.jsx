@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Header, Icon, Modal, Image, Table } from 'semantic-ui-react'
-import SessionTableRow from './SessionTableRow.jsx'
+import SessionTableRow from './sessionTableRow.jsx'
 
 class ModalHostingSessions extends React.Component {
 	constructor(props) {
@@ -8,24 +8,24 @@ class ModalHostingSessions extends React.Component {
 		this.state = {
 			host: {},
 			sections: []
-		} 
+		}
 	}
 
   componentDidUpdate(prevProps) {
     if (this.props.selectedHost.street_address !== prevProps.selectedHost.street_address) {
       this.setState({ host: this.props.selectedHost, sections: this.props.selectedHost.sections });
     }
-  }	
+  }
 
 	render() {
 		return(
 			<div>
-        <Modal          
+        <Modal
           basic
           open={this.props.modalOpen}
           onClose={this.props.handleClose}
           size='small'
-        >        
+        >
         	<Modal.Header>Profile Picture</Modal.Header>
         	<Modal.Content image scrolling>
         		<Modal.Description>
@@ -43,8 +43,8 @@ class ModalHostingSessions extends React.Component {
 						    <Table.Body>
 						    	{
 						    		this.state.sections.map(section => (
-						    			<SessionTableRow 
-						    				key={section.id} 
+						    			<SessionTableRow
+						    				key={section.id}
 						    				section={section}
 						    				handleSessionRequestClick={this.props.handleSessionRequestClick}
 						    			>
@@ -52,7 +52,7 @@ class ModalHostingSessions extends React.Component {
 						    			))
 						    	}
 						    </Table.Body>
-        			</Table>      			
+        			</Table>
         		</Modal.Description>
         	</Modal.Content>
         	<Modal.Actions>
@@ -60,10 +60,10 @@ class ModalHostingSessions extends React.Component {
         		 	<Icon name='remove' /> Close
         		 </Button>
         	</Modal.Actions>
-        </Modal>				
+        </Modal>
 			</div>
 		)
-	}	
+	}
 }
 
 export default ModalHostingSessions;
