@@ -2,19 +2,18 @@ const Sequelize = require('sequelize');
 require('dotenv').config();
 const host_addressess_data = require('./../data/sections.json');
 
-const orm = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-// const orm = new Sequelize('wyft', 'wyft', 'mysql', {
-    host:'localhost',
-    dialect: 'mysql',
-
-    pool: {
+const orm = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  dialect: 'mysql',
+  port: process.env.DB_PORT,
+  pool: {
     max: 5,
     min: 0,
     acquire: 30000,
     idle: 10000
-    },
+  },
 
-    operatorsAliases: false
+  operatorsAliases: false
 });
 
 
@@ -83,7 +82,7 @@ const importHost = function(host_data) {
 				END_TIME: session_data['end_time'],
 				host_id: host_id
 			})
-		}		
+		}
 	})
 }
 

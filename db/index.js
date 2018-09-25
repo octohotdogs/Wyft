@@ -2,11 +2,11 @@ const Sequelize = require('sequelize');
 const _ = require('underscore');
 require('dotenv').config();
 
-const orm = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-// const orm = new Sequelize('wyft', 'wyft', 'mysql', {
-  host:'localhost',
+//const orm = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+ const orm = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
   dialect: 'mysql',
-
+  port: process.env.DB_PORT,
   pool: {
     max: 5,
     min: 0,
@@ -21,7 +21,7 @@ orm.query("set FOREIGN_KEY_CHECKS=0");
 
 const Guest = orm.define('Guest',{
   FIRST_NAME: Sequelize.STRING,
-  LAST_NAME: Sequelize.STRING,  
+  LAST_NAME: Sequelize.STRING,
   STREET_NUMBER: Sequelize.INTEGER,
   STREET_NAME: Sequelize.STRING,
   ZIP_CODE: Sequelize.INTEGER,
@@ -38,7 +38,7 @@ const Host = orm.define('Host', {
   ZIP_CODE: Sequelize.INTEGER,
   ADDRESS: Sequelize.STRING,
   LAT: Sequelize.FLOAT,
-  LNG: Sequelize.FLOAT,    
+  LNG: Sequelize.FLOAT,
   USERNAME:Sequelize.STRING,
   PASSWORD: Sequelize.STRING,
   OPTIONAL_DETAILS: Sequelize.STRING
@@ -50,7 +50,7 @@ const Hosting_Session = orm.define('Hosting_Session',{
   END_TIME: Sequelize.STRING,
 }, {
   validate: {
-    
+
   }
 })
 
@@ -141,6 +141,7 @@ const fetchAvailableSessionDetails = function(zipCode, cb) {
 
 //9/23/2018
 const searchHostingSessions = function(cb) {
+
   orm.query("SELECT a.* FROM Hosts a inner join (select host_id from Hosting_Sessions where STR_TO_DATE(date, '%m/%d/%Y') >= CURDATE() group by host_id) b on a.id = b.host_id" , { type: orm.QueryTypes.SELECT})
   .then((hosts) => { 
     hosts.map((x) => {
@@ -157,24 +158,25 @@ const searchHostingSessions = function(cb) {
 
       var result = _.groupBy(hosting_sessions, (x) => {
         return x.host_id;
-      });      
+      });
       var result = result.undefined;
+
       if(result) {
         for(var i = 0; i < result.length; i++){
           var sessions = result[i];
-          var host_id = sessions[0].host_id;    
+          var host_id = sessions[0].host_id;
           var _host = _.find(hosts, (h) => {
             return h.id ===  host_id;
           });
           _host['sections'] = sessions;
         }
-        return hosts; 
+        return hosts;
       } else {
         return [];
-      }         
+      }
     }).then((data) => {
       cb(data);
-    })  
+    })
   })
   .catch((err) => console.log(err));
 }
